@@ -131,7 +131,7 @@ Operations
 Readiness: poll GET /ready (or /api/v1/civicaccess/readiness) - ready when the schema
 can be created and verified. Local verification (the release gate requires a real
 PostgreSQL):
-  python -m pip install https://github.com/CivicSuite/civiccore/releases/download/v1.2.0/civiccore-1.2.0-py3-none-any.whl
+  python -m pip install https://github.com/townlight/core/releases/download/v1.2.0/civiccore-1.2.0-py3-none-any.whl
   python -m pip install -e ".[dev]"
   export CIVICACCESS_POSTGRES_TEST_URL="postgresql+psycopg2://USER:PW@HOST:PORT/DB"
   bash scripts/verify-release.sh
