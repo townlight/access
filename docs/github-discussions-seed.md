@@ -61,7 +61,7 @@ City-core hardening (closes probe gaps #2/#3/#4):
 ### Running it locally & the release gate
 
 ```bash
-python -m pip install https://github.com/CivicSuite/civiccore/releases/download/v1.2.0/civiccore-1.2.0-py3-none-any.whl
+python -m pip install https://github.com/townlight/core/releases/download/v1.2.0/civiccore-1.2.0-py3-none-any.whl
 python -m pip install -e ".[dev]"
 python -m pytest -q
 # Full release gate requires a real PostgreSQL:

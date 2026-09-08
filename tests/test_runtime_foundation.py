@@ -20,7 +20,7 @@ def test_pyproject_uses_published_civiccore_release_wheel() -> None:
 
     assert data["tool"]["hatch"]["metadata"]["allow-direct-references"] is True
     assert (
-        "civiccore @ https://github.com/CivicSuite/civiccore/releases/download/"
+        "civiccore @ https://github.com/townlight/core/releases/download/"
         "v1.2.0/civiccore-1.2.0-py3-none-any.whl#sha256=a94ce958e36fb03c8d961e4db4672ce5bcfa25765c57d75886e999cf15703ec7"
     ) in dependencies
     assert "civiccore==1.1.0" not in dependencies

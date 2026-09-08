@@ -200,7 +200,7 @@ Readiness: poll `GET /ready` (or `/api/v1/civicaccess/readiness`) — `ready` wh
 Local verification (mirrors CI; the release gate requires a real PostgreSQL):
 
 ```bash
-python -m pip install https://github.com/CivicSuite/civiccore/releases/download/v1.2.0/civiccore-1.2.0-py3-none-any.whl
+python -m pip install https://github.com/townlight/core/releases/download/v1.2.0/civiccore-1.2.0-py3-none-any.whl
 python -m pip install -e ".[dev]"
 # Release gate (requires Postgres):
 export CIVICACCESS_POSTGRES_TEST_URL="postgresql+psycopg2://USER:PW@HOST:PORT/DB"
