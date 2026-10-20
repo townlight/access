@@ -107,7 +107,7 @@ def render_public_lookup_page() -> str:
     <p>Every output is advisory support. Staff must review fixes, translation drafts, ADA Title II notes, and export packages before publication.</p>
   </section>
 </main>
-<footer><p>CivicAccess is part of the Apache 2.0 CivicSuite open-source municipal AI project.</p></footer>
+<footer><p>CivicAccess is part of the AGPL-3.0 CivicSuite open-source municipal AI project.</p></footer>
 <script>
   const result = document.getElementById("reviewResult");
   const title = document.getElementById("title");
