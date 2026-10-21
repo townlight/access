@@ -1,4 +1,4 @@
-"""Records-ready accessibility export helpers for CivicAccess."""
+"""Records-ready accessibility export helpers for Townlight Access."""
 
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ def build_accessible_export(*, title: str, format: str = "html") -> AccessibleEx
             checklist=(),
             retention_note="No export package should be published until the format is supported.",
             status="unsupported-format",
-            fix="Choose html, pdf, markdown, or txt so CivicAccess can produce the accessibility checklist.",
+            fix="Choose html, pdf, markdown, or txt so Townlight Access can produce the accessibility checklist.",
         )
 
     return AccessibleExport(

@@ -1,10 +1,10 @@
-"""Public UI for CivicAccess."""
+"""Public UI for Townlight Access."""
 
 from __future__ import annotations
 
 
 def render_public_lookup_page() -> str:
-    """Render the accessible public-facing CivicAccess review page."""
+    """Render the accessible public-facing Townlight Access review page."""
 
     return """<!DOCTYPE html>
 <html lang="en">
@@ -170,7 +170,7 @@ def render_public_lookup_page() -> str:
         setResult("warning", "Review needs staff attention", payload.disclaimer || "Staff review is required before publication.", []);
       }
     } catch (error) {
-      setResult("warning", "Review could not finish", error.message || "Check that the notice text is present, then run the review again. If this happens in the installed stack, staff should check the CivicAccess service health endpoint.", []);
+      setResult("warning", "Review could not finish", error.message || "Check that the notice text is present, then run the review again. If this happens in the installed stack, staff should check the Townlight Access service health endpoint.", []);
     } finally {
       runReview.disabled = false;
     }
@@ -182,7 +182,7 @@ def render_public_lookup_page() -> str:
 
 
 def render_staff_page() -> str:
-    """Render the staff review workspace for saved CivicAccess work.
+    """Render the staff review workspace for saved Townlight Access work.
 
     The page never embeds the server write token. Staff paste it into a field; it is kept in
     sessionStorage and sent as the X-CivicAccess-Write-Token header on save/export only.
@@ -368,7 +368,7 @@ def render_staff_page() -> str:
   });
 
   Promise.all([loadReadiness(), loadContracts(), loadReviews()]).catch((error) => {
-    replaceWithText(readiness, "Workspace could not load", error.message || "Check CivicAccess service health.", true);
+    replaceWithText(readiness, "Workspace could not load", error.message || "Check Townlight Access service health.", true);
   });
 </script>
 </body>
