@@ -14,7 +14,7 @@
 - Plain-language rewrites must preserve source/rewrite provenance for records requests.
 - Public-facing warnings must be actionable and explain the fix path.
 - CivicAccess depends on CivicCore; CivicCore must never depend on CivicAccess.
-- Code is Apache 2.0. Docs are CC BY 4.0.
+- Code is AGPL-3.0-only, with the TownLight Public Institution Exception for qualifying deployments. Docs are CC BY 4.0.
 
 ## Placeholder Package Warning
 

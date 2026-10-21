@@ -117,4 +117,5 @@ CivicAccess **depends on CivicCore** (CivicCore does not depend on CivicAccess).
 
 ## License
 
-Code is Apache 2.0. Documentation is CC BY 4.0.
+Code: AGPL-3.0-only, with the TownLight Public Institution Exception for qualifying deployments. See [LICENSE](LICENSE) and [LICENSE-EXCEPTION.md](LICENSE-EXCEPTION.md).
+Documentation is CC BY 4.0.

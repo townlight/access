@@ -91,4 +91,4 @@ The earlier v1.0.0 release was published in error and is retained only as histor
 evidence.
 
 
-License: Code is Apache 2.0. Documentation is CC BY 4.0.
+License: Code is AGPL-3.0-only, with the TownLight Public Institution Exception for qualifying deployments (see LICENSE and LICENSE-EXCEPTION.md). Documentation is CC BY 4.0.
