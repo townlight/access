@@ -13,7 +13,7 @@ Thank you for helping civicaccess become useful municipal software.
 
 - civicaccess gives accessibility support, not certified ADA compliance.
 - Do not present multilingual variants as publication-ready without human review.
-- Do not import CivicCore placeholder packages.
+- Do not import Townlight Core placeholder packages.
 - Do not claim planned behavior is shipped.
 
 

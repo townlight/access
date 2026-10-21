@@ -1,7 +1,9 @@
-# CivicAccess User Manual
+<a id="civicaccess-user-manual"></a>
+
+# Townlight Access User Manual
 
 **Version 0.4.0 · early release**
-CivicAccess is the accessibility, plain-language, multilingual, and ADA Title II review-support module for CivicSuite.
+Townlight Access is the accessibility, plain-language, multilingual, and ADA Title II review-support module for Townlight.
 
 This manual has two parts. Read the one that fits your role:
 
@@ -12,13 +14,15 @@ This manual has two parts. Read the one that fits your role:
 
 ## Part 1 — For Civic Staff
 
-### What CivicAccess is for
+<a id="what-civicaccess-is-for"></a>
 
-CivicAccess helps your office put out public notices, forms, and documents that **everyone can read** — and keep a clean record proving you checked. It is a staff tool that gives advice and does the busywork; **you and your ADA coordinator always make the final call.**
+### What Townlight Access is for
+
+Townlight Access helps your office put out public notices, forms, and documents that **everyone can read** — and keep a clean record proving you checked. It is a staff tool that gives advice and does the busywork; **you and your ADA coordinator always make the final call.**
 
 ### What you can do with it
 
-| You want to… | CivicAccess gives you… |
+| You want to… | Townlight Access gives you… |
 |---|---|
 | Know if a notice is hard to read | A check that flags missing titles, images without descriptions, and dense wording — each with a specific fix |
 | Cut the jargon | A plain-language rewrite (e.g. "remit payment prior to the deadline" → "pay before the deadline") |
@@ -37,12 +41,14 @@ There are two places to work, and the difference matters:
 Your IT team will give you the link to each.
 
 1. Open the **public checker**. Paste in a draft notice and run the check. You'll get a list of plain-language fixes — nothing is saved, so it's a safe place to experiment.
-2. When you're ready to keep a review on the record, open the **staff workspace** and enter the staff password your IT team gave you (a one-time setup). Save the review — it goes into your CivicSuite records with a time-stamp of who saved it and when.
+2. When you're ready to keep a review on the record, open the **staff workspace** and enter the staff password your IT team gave you (a one-time setup). Save the review — it goes into your Townlight records with a time-stamp of who saved it and when.
 3. From the staff workspace, **export a records-ready package** for any saved review — ready to hand to a public-records request.
 
-### What CivicAccess will *not* do
+<a id="what-civicaccess-will-not-do"></a>
 
-CivicAccess is a tool for your staff, **not a rubber stamp.** It does **not**:
+### What Townlight Access will *not* do
+
+Townlight Access is a tool for your staff, **not a rubber stamp.** It does **not**:
 
 - give legal advice,
 - certify ADA compliance,
@@ -61,11 +67,11 @@ This is **v0.4.0, an early release** we're being upfront about. It's solid enoug
 
 ### Overview
 
-CivicAccess is a deterministic **FastAPI** service, written in Python and pinned to the published **CivicCore v1.2.0** release wheel. It performs rule-based accessibility checks — **no LLM/model calls, no network calls** — so output is reproducible and the service is cheap to run. It ships as one module inside **CivicSuite Windows Local**, a Tauri/WebView2 desktop application, and is also runnable standalone for development.
+Townlight Access is a deterministic **FastAPI** service, written in Python and pinned to the published **Townlight Core v1.2.0** release wheel. It performs rule-based accessibility checks — **no LLM/model calls, no network calls** — so output is reproducible and the service is cheap to run. It ships as one module inside **Townlight Windows Local**, a Tauri/WebView2 desktop application, and is also runnable standalone for development.
 
 ### Deployment architecture
 
-In CivicSuite Windows Local, a Tauri **supervisor** starts a bundled Python host (running CivicAccess alongside peer modules) and a bundled **PostgreSQL** instance on `127.0.0.1:15432`. The supervisor injects a `DATABASE_URL` into each module service; CivicAccess stores its data in a dedicated `civicaccess` schema in that shared cluster. The supervisor's backup copies the entire data directory (including the Postgres cluster), so CivicAccess data is captured with it.
+In Townlight Windows Local, a Tauri **supervisor** starts a bundled Python host (running Townlight Access alongside peer modules) and a bundled **PostgreSQL** instance on `127.0.0.1:15432`. The supervisor injects a `DATABASE_URL` into each module service; Townlight Access stores its data in a dedicated `civicaccess` schema in that shared cluster. The supervisor's backup copies the entire data directory (including the Postgres cluster), so Townlight Access data is captured with it.
 
 ```mermaid
 flowchart TB
@@ -116,7 +122,7 @@ sequenceDiagram
 
 ### Persistence & configuration
 
-CivicAccess resolves its review store in this order:
+Townlight Access resolves its review store in this order:
 
 1. `CIVICACCESS_REVIEW_DB_URL` — explicit override (a dev SQLite path or a pre-built Postgres URL).
 2. `DATABASE_URL` — the supervisor-injected async URL (`postgresql+asyncpg://…:15432/…`), converted to a synchronous psycopg2 URL. **This is the default under the desktop runtime.**
@@ -124,7 +130,7 @@ CivicAccess resolves its review store in this order:
 
 | Variable | Purpose |
 |---|---|
-| `DATABASE_URL` | Shared CivicCore PostgreSQL (set by the supervisor) — the production default |
+| `DATABASE_URL` | Shared Townlight Core PostgreSQL (set by the supervisor) — the production default |
 | `CIVICACCESS_REVIEW_DB_URL` | Explicit SQLAlchemy URL override |
 | `CIVICACCESS_DATA_DIR` | Directory for the SQLite dev fallback |
 | `CIVICACCESS_TRUSTED_WRITE_TOKEN` | **Required** server secret for persistent writes |
@@ -166,7 +172,7 @@ erDiagram
 | Method & path | Auth | Persists? | Purpose |
 |---|---|---|---|
 | `GET /` | — | no | Module status and boundaries |
-| `GET /health` | — | no | Package + CivicCore version |
+| `GET /health` | — | no | Package + Townlight Core version |
 | `GET /ready`, `GET /api/v1/civicaccess/readiness` | — | no | Persistence readiness gate |
 | `GET /civicaccess` | — | no | Public accessibility checker (UI) |
 | `GET /civicaccess/staff` | — | no | Staff workspace (UI; never embeds the token) |
@@ -209,7 +215,7 @@ bash scripts/verify-release.sh
 
 ### Integration
 
-CivicAccess **depends on CivicCore**; CivicCore does not depend on CivicAccess. It publishes integration contracts at `/api/v1/civicaccess/integration-contracts`, hands records exports to **CivicRecords AI**, and provides accessibility support to downstream publishers (zone, plan, permit, inspect, grants, procure).
+Townlight Access **depends on Townlight Core**; Townlight Core does not depend on Townlight Access. It publishes integration contracts at `/api/v1/civicaccess/integration-contracts`, hands records exports to **Townlight Records**, and provides accessibility support to downstream publishers (zone, plan, permit, inspect, grants, procure).
 
 ### Release status
 

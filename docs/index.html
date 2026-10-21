@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CivicAccess - accessibility support for CivicSuite</title>
+<title>Townlight Access - accessibility support for Townlight</title>
 <style>
   body { margin:0; font-family: Georgia, "Times New Roman", serif; background:#f5f7f8; color:#17202a; }
   main { max-width: 900px; margin: 0 auto; padding: 56px 24px 80px; }
@@ -27,14 +27,14 @@
 </head>
 <body>
 <main>
-  <p class="eyebrow">CivicSuite / CivicAccess</p>
+  <p class="eyebrow">Townlight / Townlight Access</p>
   <h1>Public notices everyone can read &mdash; and you can stand behind.</h1>
-  <p class="lede">CivicAccess helps your office catch accessibility problems <em>before</em> a notice goes out, trade jargon for plain language, draft other-language versions for review, and keep a clean, exportable record of every review you save. So when a resident &mdash; or an auditor &mdash; asks, you can show your work in seconds.</p>
+  <p class="lede">Townlight Access helps your office catch accessibility problems <em>before</em> a notice goes out, trade jargon for plain language, draft other-language versions for review, and keep a clean, exportable record of every review you save. So when a resident &mdash; or an auditor &mdash; asks, you can show your work in seconds.</p>
   <section class="panel">
     <span class="badge">Early release &middot; v0.4.0</span>
     <h2>What it does for your office</h2>
-    <p>Paste in a draft notice and CivicAccess checks it for the things that actually trip up readers &mdash; a missing title, an image with no description, wording that&rsquo;s too dense &mdash; and hands back specific fixes, each tied to the accessibility standard behind it. It rewrites stiff municipal language into words residents use, prepares draft translations for a qualified reviewer to approve, spells out what an accessible form or tagged PDF needs, and walks an ADA Title II review step by step.</p>
-    <p>Every saved review and export lands in your CivicSuite records with a time-stamped note of who did what. A public-records request or an accessibility complaint becomes a quick lookup instead of a scramble through old email.</p>
+    <p>Paste in a draft notice and Townlight Access checks it for the things that actually trip up readers &mdash; a missing title, an image with no description, wording that&rsquo;s too dense &mdash; and hands back specific fixes, each tied to the accessibility standard behind it. It rewrites stiff municipal language into words residents use, prepares draft translations for a qualified reviewer to approve, spells out what an accessible form or tagged PDF needs, and walks an ADA Title II review step by step.</p>
+    <p>Every saved review and export lands in your Townlight records with a time-stamped note of who did what. A public-records request or an accessibility complaint becomes a quick lookup instead of a scramble through old email.</p>
   </section>
   <section class="panel">
     <h2>What you can count on</h2>
@@ -48,7 +48,7 @@
   </section>
   <section class="panel">
     <h2>What it won&rsquo;t do</h2>
-    <p>CivicAccess is a tool for your staff, not a rubber stamp. It doesn&rsquo;t give legal advice, certify ADA compliance, or issue official translations, and it never publishes anything on its own &mdash; you and your ADA coordinator always make the final call.</p>
+    <p>Townlight Access is a tool for your staff, not a rubber stamp. It doesn&rsquo;t give legal advice, certify ADA compliance, or issue official translations, and it never publishes anything on its own &mdash; you and your ADA coordinator always make the final call.</p>
     <p>We version honestly: this is <strong>v0.4.0</strong>, an early release we stand behind for evaluation and pilots &mdash; not a finished 1.0, and not a compliance guarantee.</p>
   </section>
 
@@ -56,8 +56,8 @@
   <p class="audience-tag">For IT &amp; technical staff</p>
   <section class="panel tech">
     <h2>How it runs</h2>
-    <p>CivicAccess is a deterministic <strong>FastAPI</strong> service (Python), pinned to the published <strong>CivicCore v1.2.0</strong> release wheel. It performs rule-based checks &mdash; no model/LLM calls and no outbound network calls &mdash; so output is reproducible. It ships as one module inside <strong>CivicSuite Windows Local</strong> (a Tauri/WebView2 desktop app) and also runs standalone for development.</p>
-    <svg class="diagram" viewBox="0 0 860 520" role="img" aria-label="CivicAccess deployment architecture diagram">
+    <p>Townlight Access is a deterministic <strong>FastAPI</strong> service (Python), pinned to the published <strong>Townlight Core v1.2.0</strong> release wheel. It performs rule-based checks &mdash; no model/LLM calls and no outbound network calls &mdash; so output is reproducible. It ships as one module inside <strong>Townlight Windows Local</strong> (a Tauri/WebView2 desktop app) and also runs standalone for development.</p>
+    <svg class="diagram" viewBox="0 0 860 520" role="img" aria-label="Townlight Access deployment architecture diagram">
       <defs>
         <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
           <path d="M0,0 L8,3 L0,6 z" fill="#56606a"/>
@@ -79,19 +79,19 @@
       <rect x="30" y="190" width="800" height="240" rx="12" fill="none" stroke="#9aa5ad" stroke-width="2" stroke-dasharray="6 5"/>
       <text x="48" y="214" font-family="Arial,sans-serif" font-size="13" fill="#56606a" font-weight="700">Tauri supervisor &mdash; local machine only</text>
       <rect x="210" y="244" width="230" height="64" rx="8" fill="#eef4f8" stroke="#175b83" stroke-width="2"/>
-      <text x="325" y="272" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#175b83" font-weight="700">CivicAccess</text>
+      <text x="325" y="272" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#175b83" font-weight="700">Townlight Access</text>
       <text x="325" y="291" text-anchor="middle" font-family="Arial,sans-serif" font-size="12.5" fill="#56606a">FastAPI service</text>
       <rect x="560" y="244" width="240" height="64" rx="8" fill="#eef6f0" stroke="#2f6b50" stroke-width="2"/>
       <text x="680" y="272" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#2f6b50" font-weight="700">PostgreSQL &middot; :15432</text>
       <text x="680" y="291" text-anchor="middle" font-family="Arial,sans-serif" font-size="12.5" fill="#56606a">civicaccess schema</text>
       <rect x="210" y="344" width="230" height="48" rx="8" fill="#fff" stroke="#9aa5ad" stroke-width="2"/>
       <text x="325" y="366" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#17202a">Peer modules</text>
-      <text x="325" y="383" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#56606a">CivicClerk &middot; CivicCode &middot; &hellip;</text>
+      <text x="325" y="383" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#56606a">Townlight Meetings &middot; Townlight Code &middot; &hellip;</text>
       <!-- dependencies -->
       <rect x="120" y="452" width="280" height="48" rx="8" fill="#fff" stroke="#56606a" stroke-width="2"/>
-      <text x="260" y="481" text-anchor="middle" font-family="Arial,sans-serif" font-size="13.5" fill="#17202a">depends on CivicCore v1.2.0</text>
+      <text x="260" y="481" text-anchor="middle" font-family="Arial,sans-serif" font-size="13.5" fill="#17202a">depends on Townlight Core v1.2.0</text>
       <rect x="460" y="452" width="300" height="48" rx="8" fill="#fff" stroke="#56606a" stroke-width="2" stroke-dasharray="5 4"/>
-      <text x="610" y="481" text-anchor="middle" font-family="Arial,sans-serif" font-size="13.5" fill="#17202a">records-export &rarr; CivicRecords AI</text>
+      <text x="610" y="481" text-anchor="middle" font-family="Arial,sans-serif" font-size="13.5" fill="#17202a">records-export &rarr; Townlight Records</text>
       <!-- arrows -->
       <line x1="190" y1="72" x2="190" y2="102" stroke="#56606a" stroke-width="2" marker-end="url(#ah)"/>
       <line x1="670" y1="72" x2="670" y2="102" stroke="#56606a" stroke-width="2" marker-end="url(#ah)"/>
@@ -107,7 +107,7 @@
     <h2>At a glance</h2>
     <table>
       <tr><th>Concern</th><th>Detail</th></tr>
-      <tr><td>Persistence</td><td>Defaults to the shared CivicCore PostgreSQL (reads supervisor <code>DATABASE_URL</code>); SQLite is a dev fallback</td></tr>
+      <tr><td>Persistence</td><td>Defaults to the shared Townlight Core PostgreSQL (reads supervisor <code>DATABASE_URL</code>); SQLite is a dev fallback</td></tr>
       <tr><td>Auth</td><td>Trusted-write token on persistence routes (constant-time; 403 invalid / 503 if unconfigured); read &amp; analyze are open</td></tr>
       <tr><td>Audit</td><td><code>audit_events</code> row on every write/export; <code>review.create</code> is atomic with the record</td></tr>
       <tr><td>Backups</td><td>Data rides the supervisor&rsquo;s wholesale <code>Data/</code> backup (incl. the Postgres cluster)</td></tr>

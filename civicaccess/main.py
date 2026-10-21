@@ -30,9 +30,9 @@ from civicaccess.workflows import (
 
 
 app = FastAPI(
-    title="CivicAccess",
+    title='Townlight Access',
     version=__version__,
-    description="Accessibility, plain-language, multilingual, and ADA review support for CivicSuite.",
+    description='Accessibility, plain-language, multilingual, and ADA review support for Townlight.',
 )
 
 _review_repository: AccessibilityReviewRepository | None = None

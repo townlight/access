@@ -1,10 +1,10 @@
-CivicAccess
+Townlight Access
 ===========
 
-CivicAccess is the CivicSuite module for accessibility, plain-language,
+Townlight Access is the Townlight module for accessibility, plain-language,
 multilingual, and ADA Title II review-support workflows.
 
-Status: v0.4.0 - early release. CivicAccess does NOT give legal advice, certify ADA
+Status: v0.4.0 - early release. Townlight Access does NOT give legal advice, certify ADA
 compliance, issue official translations, or publish anything on its own - your staff,
 ADA coordinator, translators, and legal counsel always make the final call.
 
@@ -16,7 +16,7 @@ USER-MANUAL.md (Part 1). IT/technical: see the technical section below.
 FOR CIVIC STAFF (the short version)
 -----------------------------------
 
-CivicAccess helps your office put out public notices everyone can read - and keep
+Townlight Access helps your office put out public notices everyone can read - and keep
 a record proving you checked.
 - Paste a draft into the public checker to get instant, plain-language fixes.
   Nothing is saved - it's a safe place to try things.
@@ -30,20 +30,20 @@ Full walkthrough: USER-MANUAL.md (Part 1).
 FOR IT & TECHNICAL STAFF
 ------------------------
 
-CivicAccess is a deterministic FastAPI module (Python), pinned to the published
-CivicCore v1.2.0 release wheel - no model/LLM calls and no outbound network calls.
+Townlight Access is a deterministic FastAPI module (Python), pinned to the published
+Townlight Core v1.2.0 release wheel - no model/LLM calls and no outbound network calls.
 
 Architecture (text sketch; see README.md for the rendered diagram):
 
   Resident  --> /civicaccess  (public, no token) --+
-                                                    +--> CivicAccess (FastAPI) --> PostgreSQL :15432
+                                                    +--> Townlight Access (FastAPI) --> PostgreSQL :15432
   City staff --> /civicaccess/staff (write token) --+        |                     (civicaccess schema)
-                                                             +-- depends on ----> CivicCore v1.2.0
-                                                             +-- records-export -> CivicRecords AI
+                                                             +-- depends on ----> Townlight Core v1.2.0
+                                                             +-- records-export -> Townlight Records
 
   All of the above runs inside the Tauri supervisor on the local machine. The
   supervisor injects DATABASE_URL and backs up the whole Data/ directory (which
-  includes the PostgreSQL cluster), so CivicAccess data is captured with it.
+  includes the PostgreSQL cluster), so Townlight Access data is captured with it.
 
 What it provides:
 - A stateless public accessibility checker (/civicaccess): WCAG-aligned issues with
@@ -57,7 +57,7 @@ What it provides:
 - A persisted audit trail of every write/export; integration contracts.
 
 Persistence & configuration:
-- DATABASE_URL ................. shared CivicCore PostgreSQL (supervisor-injected); the default
+- DATABASE_URL ................. shared Townlight Core PostgreSQL (supervisor-injected); the default
 - CIVICACCESS_REVIEW_DB_URL .... explicit SQLAlchemy URL override
 - CIVICACCESS_DATA_DIR ......... directory for the SQLite dev fallback
 - CIVICACCESS_TRUSTED_WRITE_TOKEN .. REQUIRED server secret for persistent writes
