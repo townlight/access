@@ -1,14 +1,16 @@
 # GitHub Discussions Seed Posts
 
-Seed posts for the CivicAccess Discussions board, organized by audience. Post the **civic-staff** set in a general/community category and the **technical** set in a development category.
+Seed posts for the Townlight Access Discussions board, organized by audience. Post the **civic-staff** set in a general/community category and the **technical** set in a development category.
 
 ---
 
 ## For civic staff
 
-### 👋 Welcome — what CivicAccess does for your office
+<a id="-welcome--what-civicaccess-does-for-your-office"></a>
 
-CivicAccess helps your office put out public notices, forms, and documents that **everyone can read** — and keep a clean record proving you checked.
+### 👋 Welcome — what Townlight Access does for your office
+
+Townlight Access helps your office put out public notices, forms, and documents that **everyone can read** — and keep a clean record proving you checked.
 
 - Paste a draft into the **public checker** for instant, plain-language fixes. Nothing is saved — it's a safe place to try things.
 - Use the **staff workspace** to save a review on the record and export a records-ready package for public-records requests.
@@ -20,9 +22,11 @@ This is an early release (v0.4.0) — great for evaluating and piloting. Tell us
 
 Share examples of public notices, forms, agendas, PDFs, or documents where accessibility and plain-language support would help your city. Real examples shape what we build next.
 
-### Where CivicAccess stops (and a human takes over)
+<a id="where-civicaccess-stops-and-a-human-takes-over"></a>
 
-CivicAccess is a tool for your staff, **not a rubber stamp.** It does not give legal advice, certify ADA compliance, or issue official translations, and it never publishes anything on its own. Staff reviewers, ADA coordinators, translators, and legal counsel always make the final call. Drafts it produces — especially translations — are starting points for a qualified human, not the final word.
+### Where Townlight Access stops (and a human takes over)
+
+Townlight Access is a tool for your staff, **not a rubber stamp.** It does not give legal advice, certify ADA compliance, or issue official translations, and it never publishes anything on its own. Staff reviewers, ADA coordinators, translators, and legal counsel always make the final call. Drafts it produces — especially translations — are starting points for a qualified human, not the final word.
 
 ---
 
@@ -30,7 +34,7 @@ CivicAccess is a tool for your staff, **not a rubber stamp.** It does not give l
 
 ### Architecture & how it runs
 
-CivicAccess is a deterministic **FastAPI** module (no model/LLM calls, no outbound network), pinned to the published **CivicCore v1.2.0** release wheel. In CivicSuite Windows Local, a Tauri supervisor runs it against a bundled PostgreSQL on `127.0.0.1:15432` (dedicated `civicaccess` schema); the supervisor's backup captures the whole data directory.
+Townlight Access is a deterministic **FastAPI** module (no model/LLM calls, no outbound network), pinned to the published **Townlight Core v1.2.0** release wheel. In Townlight Windows Local, a Tauri supervisor runs it against a bundled PostgreSQL on `127.0.0.1:15432` (dedicated `civicaccess` schema); the supervisor's backup captures the whole data directory.
 
 ```mermaid
 flowchart TB
@@ -53,7 +57,7 @@ Full API, data model, and security details: [README](../README.md) · [User Manu
 
 City-core hardening (closes probe gaps #2/#3/#4):
 
-- **Persistence** now defaults to the shared CivicCore PostgreSQL (reads the supervisor's `DATABASE_URL`); SQLite is a dev fallback.
+- **Persistence** now defaults to the shared Townlight Core PostgreSQL (reads the supervisor's `DATABASE_URL`); SQLite is a dev fallback.
 - **Write authz:** persistence routes (`/review`, `/reviews/{id}/records-export`) require `X-CivicAccess-Write-Token` (constant-time; 403 invalid / 503 if unconfigured). A new stateless `POST /analyze` powers the public surface so it never writes.
 - **Audit:** every write/export persists an `audit_events` row; `review.create` is atomic with the record.
 - The earlier `v1.0.0` tag was published in error and is retained only as historical evidence.

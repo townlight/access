@@ -1,6 +1,8 @@
-# CivicAccess Implementation Plan
+<a id="civicaccess-implementation-plan"></a>
 
-CivicAccess v0.2.0 is a corrective demotion after the mistaken v1.0.0 publication. It contains deterministic accessible forms, accessible publishing workflows, WCAG review support, plain-language rewrites, multilingual draft variants, ADA Title II review support, tagged-PDF expectations, records-ready exports, persistence for review records, readiness gates, CivicCore v1.2.0 release-wheel alignment, and an API-backed public review UI, but it is not finished, shipping, city-ready, product-ready, or public-use ready.
+# Townlight Access Implementation Plan
+
+Townlight Access v0.2.0 is a corrective demotion after the mistaken v1.0.0 publication. It contains deterministic accessible forms, accessible publishing workflows, WCAG review support, plain-language rewrites, multilingual draft variants, ADA Title II review support, tagged-PDF expectations, records-ready exports, persistence for review records, readiness gates, Townlight Core v1.2.0 release-wheel alignment, and an API-backed public review UI, but it is not finished, shipping, city-ready, product-ready, or public-use ready.
 
 ## Verification Bar
 

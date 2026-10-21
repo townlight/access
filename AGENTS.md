@@ -1,24 +1,26 @@
-# CivicAccess Agent Contract
+<a id="civicaccess-agent-contract"></a>
+
+# Townlight Access Agent Contract
 
 ## Source Of Truth
 
-- Upstream suite spec: `CivicSuite/civicsuite/docs/CivicSuiteUnifiedSpec.md`, especially section 12.
-- Suite ADRs: `CivicSuite/civicsuite/docs/architecture/`.
-- CivicAccess supports accessibility and public-trust workflows across modules; it does not replace ADA coordinators, legal counsel, translators, or certified auditors.
+- Upstream suite spec: `townlight/townlight/docs/CivicSuiteUnifiedSpec.md`, especially section 12.
+- Suite ADRs: `townlight/townlight/docs/architecture/`.
+- Townlight Access supports accessibility and public-trust workflows across modules; it does not replace ADA coordinators, legal counsel, translators, or certified auditors.
 
 ## Non-Negotiables
 
-- CivicAccess never claims certified ADA compliance.
-- CivicAccess never provides legal advice.
+- Townlight Access never claims certified ADA compliance.
+- Townlight Access never provides legal advice.
 - Multilingual variants must be marked as requiring human review.
 - Plain-language rewrites must preserve source/rewrite provenance for records requests.
 - Public-facing warnings must be actionable and explain the fix path.
-- CivicAccess depends on CivicCore; CivicCore must never depend on CivicAccess.
+- Townlight Access depends on Townlight Core; Townlight Core must never depend on Townlight Access.
 - Code is AGPL-3.0-only, with the TownLight Public Institution Exception for qualifying deployments. Docs are CC BY 4.0.
 
 ## Placeholder Package Warning
 
-Do not import from CivicCore placeholder packages until CivicCore ships real implementations for them: `audit`, `auth`, `catalog`, `connectors`, `exemptions`, `ingest`, `notifications`, `onboarding`, `scaffold`, `search`, `verification`.
+Do not import from Townlight Core placeholder packages until Townlight Core ships real implementations for them: `audit`, `auth`, `catalog`, `connectors`, `exemptions`, `ingest`, `notifications`, `onboarding`, `scaffold`, `search`, `verification`.
 
 ## Milestone Rule
 

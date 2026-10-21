@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest a CivicAccess capability
+about: Suggest a Townlight Access capability
 title: "[Feature]: "
 labels: enhancement
 assignees: ""

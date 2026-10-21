@@ -1,4 +1,4 @@
-"""FastAPI runtime foundation for CivicAccess."""
+"""FastAPI runtime foundation for Townlight Access."""
 
 import hmac
 import os
@@ -30,9 +30,9 @@ from civicaccess.workflows import (
 
 
 app = FastAPI(
-    title="CivicAccess",
+    title='Townlight Access',
     version=__version__,
-    description="Accessibility, plain-language, multilingual, and ADA review support for CivicSuite.",
+    description='Accessibility, plain-language, multilingual, and ADA review support for Townlight.',
 )
 
 _review_repository: AccessibilityReviewRepository | None = None
@@ -90,7 +90,7 @@ def root() -> dict[str, str]:
         "version": __version__,
         "status": "standalone readiness candidate",
         "message": (
-            "CivicAccess provides local accessibility review support with accessible-form planning, publishing workflow checks, WCAG-aligned review records, plain-language rewrites, multilingual sample variants, ADA Title II review-support packages, tagged-PDF expectations, records-ready export checklists, and API-backed public and staff interfaces. "
+            "Townlight Access provides local accessibility review support with accessible-form planning, publishing workflow checks, WCAG-aligned review records, plain-language rewrites, multilingual sample variants, ADA Title II review-support packages, tagged-PDF expectations, records-ready export checklists, and API-backed public and staff interfaces. "
             "It does not provide legal advice, certified ADA compliance, official translation certification, live LLM calls, or final publication approval."
         ),
         "next_step": "Open /civicaccess/staff to review saved publication work and export records-ready packages.",
@@ -125,7 +125,7 @@ async def validation_exception_handler(
         status_code=422,
         content={
             "detail": {
-                "message": f"CivicAccess could not validate: {field_list}.",
+                "message": f"Townlight Access could not validate: {field_list}.",
                 "fix": (
                     "Send a JSON body that includes the required field names listed in "
                     "the fields array, using strings for text inputs and booleans for yes/no inputs."
@@ -145,7 +145,7 @@ def ready() -> dict[str, object]:
 
 @app.get("/api/v1/civicaccess/readiness")
 def readiness() -> dict[str, object]:
-    """Return detailed CivicAccess local persistence readiness for operators."""
+    """Return detailed Townlight Access local persistence readiness for operators."""
 
     return _readiness_payload()
 
@@ -384,7 +384,7 @@ def _authorize_persistent_write(provided_token: str | None) -> None:
         raise HTTPException(
             status_code=503,
             detail={
-                "message": "CivicAccess durable write guard is not configured.",
+                "message": "Townlight Access durable write guard is not configured.",
                 "fix": "Set CIVICACCESS_TRUSTED_WRITE_TOKEN before enabling persistence-backed writes.",
             },
         )
@@ -392,7 +392,7 @@ def _authorize_persistent_write(provided_token: str | None) -> None:
         raise HTTPException(
             status_code=403,
             detail={
-                "message": "CivicAccess durable write token is missing or invalid.",
+                "message": "Townlight Access durable write token is missing or invalid.",
                 "fix": "Send the configured X-CivicAccess-Write-Token header for persistence-backed writes.",
             },
         )
@@ -444,7 +444,7 @@ def _readiness_payload() -> dict[str, object]:
     schema_status = repository.schema_status()
     blockers: list[str] = []
     if not schema_status.ready:
-        blockers.append("Run the local CivicAccess schema status/migration check.")
+        blockers.append("Run the local Townlight Access schema status/migration check.")
     ready_for_public_use = not blockers
     return {
         "status": "ready" if ready_for_public_use else "not-ready",

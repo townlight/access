@@ -1,6 +1,6 @@
 ## Summary
 
-Describe the CivicAccess change in one or two sentences.
+Describe the Townlight Access change in one or two sentences.
 
 ## Scope
 
@@ -23,4 +23,4 @@ Paste actual command output or screenshots for every checked item:
 - [ ] This PR does not claim certified ADA compliance.
 - [ ] This PR does not provide legal advice.
 - [ ] This PR keeps multilingual variants behind human-review language.
-- [ ] This PR does not import CivicCore placeholder packages.
+- [ ] This PR does not import Townlight Core placeholder packages.

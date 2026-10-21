@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a CivicAccess defect
+about: Report a Townlight Access defect
 title: "[Bug]: "
 labels: bug
 assignees: ""
@@ -12,12 +12,12 @@ Describe the issue.
 
 ## Expected behavior
 
-What should CivicAccess have done instead?
+What should Townlight Access have done instead?
 
 ## Environment
 
-- CivicAccess version:
-- CivicCore version:
+- Townlight Access version:
+- Townlight Core version:
 - Operating system:
 
 ## Evidence

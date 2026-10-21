@@ -1,4 +1,6 @@
-# CivicAccess Milestones
+<a id="civicaccess-milestones"></a>
+
+# Townlight Access Milestones
 
 ## Milestone 0/1 - Scaffold And Runtime
 
@@ -26,7 +28,7 @@ Functional public page at `/civicaccess` with loading, success, empty, error, an
 
 ## Milestone 7 - v0.1.x Foundation Releases
 
-Version sync, release artifacts, GitHub release, persistence, and CivicCore dependency alignment.
+Version sync, release artifacts, GitHub release, persistence, and Townlight Core dependency alignment.
 
 ## Milestone 8 - v1.0.0 Public-Use Support Release
 

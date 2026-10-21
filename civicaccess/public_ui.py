@@ -1,17 +1,17 @@
-"""Public UI for CivicAccess."""
+"""Public UI for Townlight Access."""
 
 from __future__ import annotations
 
 
 def render_public_lookup_page() -> str:
-    """Render the accessible public-facing CivicAccess review page."""
+    """Render the accessible public-facing Townlight Access review page."""
 
     return """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CivicAccess Public Accessibility Support</title>
+<title>Townlight Access Public Accessibility Support</title>
 <style>
   :root { --ink:#17202a; --muted:#56606a; --paper:#fffdf7; --blue:#175b83; --green:#2f6b50; --gold:#d8b45b; --line:#d7c8a8; --danger:#9a3d2f; }
   * { box-sizing: border-box; }
@@ -50,9 +50,9 @@ def render_public_lookup_page() -> str:
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header>
-  <p class="eyebrow">CivicSuite / CivicAccess</p>
+  <p class="eyebrow">Townlight / Townlight Access</p>
   <h1>Make public information easier to read, reach, and preserve.</h1>
-  <p class="lede">CivicAccess gives staff a deterministic review path for accessible forms, public notices, plain-language rewrites, multilingual samples, ADA Title II review support, tagged-PDF expectations, and municipal-record exports.</p>
+  <p class="lede">Townlight Access gives staff a deterministic review path for accessible forms, public notices, plain-language rewrites, multilingual samples, ADA Title II review support, tagged-PDF expectations, and municipal-record exports.</p>
   <p><span class="badge">v0.4.0 standalone readiness candidate</span></p>
 </header>
 <main id="main" tabindex="-1">
@@ -68,7 +68,7 @@ def render_public_lookup_page() -> str:
       <button id="runReview" type="button">Run review</button>
       <div id="reviewResult" class="result pending" role="status" aria-live="polite">
         <h3>Partial review pending</h3>
-        <p>Add or confirm the notice fields, then run the review. CivicAccess will show actionable fixes before staff publication review.</p>
+        <p>Add or confirm the notice fields, then run the review. Townlight Access will show actionable fixes before staff publication review.</p>
       </div>
     </article>
     <article class="panel">
@@ -99,7 +99,7 @@ def render_public_lookup_page() -> str:
     <article class="panel">
       <p class="kicker">ADA boundary</p>
       <h2>Support, not certification</h2>
-      <div class="result warning"><p>CivicAccess does not provide legal advice, certified ADA compliance, official translation certification, or final publication approval. ADA coordinators and qualified reviewers remain responsible for official decisions.</p></div>
+      <div class="result warning"><p>Townlight Access does not provide legal advice, certified ADA compliance, official translation certification, or final publication approval. ADA coordinators and qualified reviewers remain responsible for official decisions.</p></div>
     </article>
   </section>
   <section class="notice" aria-labelledby="boundary-title">
@@ -107,7 +107,7 @@ def render_public_lookup_page() -> str:
     <p>Every output is advisory support. Staff must review fixes, translation drafts, ADA Title II notes, and export packages before publication.</p>
   </section>
 </main>
-<footer><p>CivicAccess is part of the AGPL-3.0 CivicSuite open-source municipal AI project.</p></footer>
+<footer><p>Townlight Access is part of the AGPL-3.0 Townlight open-source municipal AI project.</p></footer>
 <script>
   const result = document.getElementById("reviewResult");
   const title = document.getElementById("title");
@@ -170,7 +170,7 @@ def render_public_lookup_page() -> str:
         setResult("warning", "Review needs staff attention", payload.disclaimer || "Staff review is required before publication.", []);
       }
     } catch (error) {
-      setResult("warning", "Review could not finish", error.message || "Check that the notice text is present, then run the review again. If this happens in the installed stack, staff should check the CivicAccess service health endpoint.", []);
+      setResult("warning", "Review could not finish", error.message || "Check that the notice text is present, then run the review again. If this happens in the installed stack, staff should check the Townlight Access service health endpoint.", []);
     } finally {
       runReview.disabled = false;
     }
@@ -182,7 +182,7 @@ def render_public_lookup_page() -> str:
 
 
 def render_staff_page() -> str:
-    """Render the staff review workspace for saved CivicAccess work.
+    """Render the staff review workspace for saved Townlight Access work.
 
     The page never embeds the server write token. Staff paste it into a field; it is kept in
     sessionStorage and sent as the X-CivicAccess-Write-Token header on save/export only.
@@ -193,7 +193,7 @@ def render_staff_page() -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CivicAccess Staff Workspace</title>
+<title>Townlight Access Staff Workspace</title>
 <style>
   :root { --ink:#17202a; --muted:#56606a; --paper:#fffdf7; --blue:#175b83; --green:#2f6b50; --gold:#d8b45b; --line:#d7c8a8; --danger:#9a3d2f; }
   * { box-sizing: border-box; }
@@ -231,9 +231,9 @@ def render_staff_page() -> str:
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header>
-  <p class="eyebrow">CivicSuite / CivicAccess staff</p>
+  <p class="eyebrow">Townlight / Townlight Access staff</p>
   <h1>Review, preserve, and export accessible publication work.</h1>
-  <p class="lede">This workspace gives staff a saved local queue for accessibility reviews, records-ready exports, and downstream publication contracts used by other CivicSuite modules.</p>
+  <p class="lede">This workspace gives staff a saved local queue for accessibility reviews, records-ready exports, and downstream publication contracts used by other Townlight modules.</p>
 </header>
 <main id="main" tabindex="-1">
   <section class="grid" aria-labelledby="new-review-title">
@@ -264,7 +264,7 @@ def render_staff_page() -> str:
     </article>
   </section>
 </main>
-<footer><p>CivicAccess staff outputs are advisory. Staff approval, qualified translation review, and ADA coordinator review remain required for official publication decisions.</p></footer>
+<footer><p>Townlight Access staff outputs are advisory. Staff approval, qualified translation review, and ADA coordinator review remain required for official publication decisions.</p></footer>
 <script>
   const title = document.getElementById("title");
   const body = document.getElementById("body");
@@ -368,7 +368,7 @@ def render_staff_page() -> str:
   });
 
   Promise.all([loadReadiness(), loadContracts(), loadReviews()]).catch((error) => {
-    replaceWithText(readiness, "Workspace could not load", error.message || "Check CivicAccess service health.", true);
+    replaceWithText(readiness, "Workspace could not load", error.message || "Check Townlight Access service health.", true);
   });
 </script>
 </body>

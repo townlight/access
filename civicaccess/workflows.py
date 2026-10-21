@@ -1,4 +1,4 @@
-"""Workflow helpers for CivicAccess public-use release."""
+"""Workflow helpers for Townlight Access public-use release."""
 
 from __future__ import annotations
 

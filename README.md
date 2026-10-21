@@ -1,8 +1,10 @@
-# CivicAccess
+<a id="civicaccess"></a>
 
-CivicAccess is the CivicSuite module for accessibility, plain-language, multilingual, and ADA Title II review-support workflows.
+# Townlight Access
 
-> **v0.4.0 · early release.** CivicAccess does **not** give legal advice, certify ADA compliance, issue official translations, or publish anything on its own — your staff, ADA coordinator, translators, and legal counsel always make the final call.
+Townlight Access is the Townlight module for accessibility, plain-language, multilingual, and ADA Title II review-support workflows.
+
+> **v0.4.0 · early release.** Townlight Access does **not** give legal advice, certify ADA compliance, issue official translations, or publish anything on its own — your staff, ADA coordinator, translators, and legal counsel always make the final call.
 
 This README has two audiences:
 
@@ -13,7 +15,7 @@ This README has two audiences:
 
 ## For civic staff (the short version)
 
-CivicAccess helps your office put out public notices everyone can read — and keep a record proving you checked.
+Townlight Access helps your office put out public notices everyone can read — and keep a record proving you checked.
 
 - Paste a draft into the **public checker** to get instant, plain-language fixes. Nothing is saved — it's a safe place to try things.
 - To keep a review **on the record**, save it in the **staff workspace** and export a copy you can hand to a public-records request.
@@ -25,11 +27,11 @@ Full walkthrough: [User Manual, Part 1](USER-MANUAL.md#part-1--for-civic-staff).
 
 ## For IT & technical staff
 
-CivicAccess is a deterministic FastAPI module (Python), pinned to the published CivicCore v1.2.0 release wheel — no model/LLM calls and no outbound network calls, so output is reproducible.
+Townlight Access is a deterministic FastAPI module (Python), pinned to the published Townlight Core v1.2.0 release wheel — no model/LLM calls and no outbound network calls, so output is reproducible.
 
 ### Architecture
 
-In CivicSuite Windows Local, a Tauri supervisor runs CivicAccess (and peer modules) against a bundled PostgreSQL on `127.0.0.1:15432`; CivicAccess uses a dedicated `civicaccess` schema. The supervisor's backup captures the whole data directory, so module data rides along.
+In Townlight Windows Local, a Tauri supervisor runs Townlight Access (and peer modules) against a bundled PostgreSQL on `127.0.0.1:15432`; Townlight Access uses a dedicated `civicaccess` schema. The supervisor's backup captures the whole data directory, so module data rides along.
 
 ```mermaid
 flowchart TB
@@ -83,7 +85,7 @@ Token-guarded writes require `X-CivicAccess-Write-Token` matching `CIVICACCESS_T
 
 | Variable | Purpose |
 |---|---|
-| `DATABASE_URL` | Shared CivicCore PostgreSQL (supervisor-injected) — the production default |
+| `DATABASE_URL` | Shared Townlight Core PostgreSQL (supervisor-injected) — the production default |
 | `CIVICACCESS_REVIEW_DB_URL` | Explicit SQLAlchemy URL override |
 | `CIVICACCESS_DATA_DIR` | Directory for the SQLite dev fallback (`data/civicaccess-reviews.db`) |
 | `CIVICACCESS_TRUSTED_WRITE_TOKEN` | **Required** server secret for persistent writes |
@@ -109,7 +111,7 @@ bash scripts/verify-release.sh
 
 ### Integration
 
-CivicAccess **depends on CivicCore** (CivicCore does not depend on CivicAccess). It publishes contracts at `/api/v1/civicaccess/integration-contracts`, hands records exports to **CivicRecords AI**, and supports downstream publishers (zone, plan, permit, inspect, grants, procure).
+Townlight Access **depends on Townlight Core** (Townlight Core does not depend on Townlight Access). It publishes contracts at `/api/v1/civicaccess/integration-contracts`, hands records exports to **Townlight Records**, and supports downstream publishers (zone, plan, permit, inspect, grants, procure).
 
 ### Release status
 
