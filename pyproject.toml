@@ -8,7 +8,8 @@ version = "0.4.0"
 description = "civicaccess runtime foundation for accessibility, plain-language, multilingual, and ADA review support."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "AGPL-3.0-only" }
+license = "AGPL-3.0-only"
+license-files = ["LICENSE", "LICENSE-CODE"]
 authors = [
   { name = "CivicSuite contributors" }
 ]

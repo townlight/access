@@ -119,5 +119,7 @@ Townlight Access **depends on Townlight Core** (Townlight Core does not depend o
 
 ## License
 
-Code: AGPL-3.0-only, with the TownLight Public Institution Exception for qualifying deployments. See [LICENSE](LICENSE) and [LICENSE-EXCEPTION.md](LICENSE-EXCEPTION.md).
+Code: AGPL-3.0-only. See [LICENSE](LICENSE); historical grants are retained under docs/licensing/history.
 Documentation is CC BY 4.0.
+
+Current owned candidate code: AGPL-3.0-only, without additional permissions. Historical grants retained under docs/licensing/history.

@@ -7,7 +7,7 @@ from civicaccess.access_review import AccessibilityReviewRepository
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Check and initialize the local Townlight Access review database schema."
+        description="Check and initialize the local CivicAccess review database schema."
     )
     parser.add_argument(
         "--db-url",
@@ -26,7 +26,7 @@ def main() -> None:
     missing = ", ".join(status.missing_tables) if status.missing_tables else "none"
     version = status.schema_version or "none"
     print(
-        "Townlight Access schema "
+        "CivicAccess schema "
         f"{ready}: version={version}; expected={status.expected_schema_version}; "
         f"dialect={status.dialect}; missing_tables={missing}."
     )

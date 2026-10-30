@@ -1,0 +1,212 @@
+{
+  "edition": "Townlight Beta 1",
+  "base_commit": "72b88a300804d7af0d1d01696fca2a8d25cfbe01",
+  "installer_sha256": "98bcdef11ebdf5c767f620c904ff49f85115fde3b5c23f62703b111e645aaf86",
+  "owned_source_sha256": "84a23e1297e42d17b16cfc9e51b2dd78bc46414c0de8ad7ebd2466c1a409d06b",
+  "documentation_sha256": "a928bb1c40fec7ef6f223c7b77bc9fe7837e4cfffcebf35bb3309cc5549284e6",
+  "release": "https://github.com/townlight/townlight/releases/tag/townlight-beta-1",
+  "archive_files": [
+    {
+      "archive": "products/access/LICENSE",
+      "repo": "access",
+      "path": "LICENSE",
+      "sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e",
+      "status": "same",
+      "publication_sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e"
+    },
+    {
+      "archive": "products/access/LICENSE-CODE",
+      "repo": "access",
+      "path": "LICENSE-CODE",
+      "sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e",
+      "status": "changed",
+      "publication_sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e"
+    },
+    {
+      "archive": "products/access/LICENSE-DOCS",
+      "repo": "access",
+      "path": "LICENSE-DOCS",
+      "sha256": "d07988f4be47912f75a73b44da8a9c0b602bf6c8ced69de858b848f379ecd973",
+      "status": "same",
+      "publication_sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e"
+    },
+    {
+      "archive": "products/access/README.md",
+      "repo": "access",
+      "path": "README.md",
+      "sha256": "2ef82c40da16e88e586e8733261699a1521f6c6d0b968f5391e608aefcdcd4bb",
+      "status": "changed",
+      "publication_sha256": "2ef82c40da16e88e586e8733261699a1521f6c6d0b968f5391e608aefcdcd4bb"
+    },
+    {
+      "archive": "products/access/civicaccess/__init__.py",
+      "repo": "access",
+      "path": "civicaccess/__init__.py",
+      "sha256": "81d66a6fd270f40a647d62a028bbd33e544d720b24c7e0a3eb52c24c8832a71f",
+      "status": "same",
+      "publication_sha256": "81d66a6fd270f40a647d62a028bbd33e544d720b24c7e0a3eb52c24c8832a71f"
+    },
+    {
+      "archive": "products/access/civicaccess/access_review.py",
+      "repo": "access",
+      "path": "civicaccess/access_review.py",
+      "sha256": "49d7074b3a20acfdc5033f94e690cff8cfdbeae63e1dd51987bb73d129cc5ee2",
+      "status": "changed",
+      "publication_sha256": "49d7074b3a20acfdc5033f94e690cff8cfdbeae63e1dd51987bb73d129cc5ee2"
+    },
+    {
+      "archive": "products/access/civicaccess/db_admin.py",
+      "repo": "access",
+      "path": "civicaccess/db_admin.py",
+      "sha256": "2d72bac67b008cbc2a07fbb9db85c08dc9e0d50c6e0a179aad2d3846167a063d",
+      "status": "changed",
+      "publication_sha256": "2d72bac67b008cbc2a07fbb9db85c08dc9e0d50c6e0a179aad2d3846167a063d"
+    },
+    {
+      "archive": "products/access/civicaccess/exports.py",
+      "repo": "access",
+      "path": "civicaccess/exports.py",
+      "sha256": "b55c9d08e5a12b8b1a0cdc765811efcbdc651becd0cfd1dbe74ffba7a2a77745",
+      "status": "changed",
+      "publication_sha256": "b55c9d08e5a12b8b1a0cdc765811efcbdc651becd0cfd1dbe74ffba7a2a77745"
+    },
+    {
+      "archive": "products/access/civicaccess/main.py",
+      "repo": "access",
+      "path": "civicaccess/main.py",
+      "sha256": "379d3c880dd949db3325fa055b8822cf5f59a20b8d7c4da3a84a8f12989134ab",
+      "status": "changed",
+      "publication_sha256": "379d3c880dd949db3325fa055b8822cf5f59a20b8d7c4da3a84a8f12989134ab"
+    },
+    {
+      "archive": "products/access/civicaccess/multilingual.py",
+      "repo": "access",
+      "path": "civicaccess/multilingual.py",
+      "sha256": "a7956cbca7dc27f7b2ad1d3a0786ec9523211cd032cfb4403e28d80f60e4b7f0",
+      "status": "changed",
+      "publication_sha256": "a7956cbca7dc27f7b2ad1d3a0786ec9523211cd032cfb4403e28d80f60e4b7f0"
+    },
+    {
+      "archive": "products/access/civicaccess/plain_language.py",
+      "repo": "access",
+      "path": "civicaccess/plain_language.py",
+      "sha256": "cc43e184d1b7778c5cb47471cad9f47fd2557973a8fcd952bde41d2a7a63e3cb",
+      "status": "changed",
+      "publication_sha256": "cc43e184d1b7778c5cb47471cad9f47fd2557973a8fcd952bde41d2a7a63e3cb"
+    },
+    {
+      "archive": "products/access/civicaccess/public_ui.py",
+      "repo": "access",
+      "path": "civicaccess/public_ui.py",
+      "sha256": "5f975f28d9f7a1cd522ac3c4c8e7045042e07c035c4a8bc409479902463379fc",
+      "status": "changed",
+      "publication_sha256": "5f975f28d9f7a1cd522ac3c4c8e7045042e07c035c4a8bc409479902463379fc"
+    },
+    {
+      "archive": "products/access/civicaccess/workflows.py",
+      "repo": "access",
+      "path": "civicaccess/workflows.py",
+      "sha256": "80ee4dd485ba6b0136842fe75c5b41536091181bd96f41efbaddd5a96ac73c92",
+      "status": "changed",
+      "publication_sha256": "80ee4dd485ba6b0136842fe75c5b41536091181bd96f41efbaddd5a96ac73c92"
+    },
+    {
+      "archive": "products/access/docs/licensing/history/LICENSE-CODE",
+      "repo": "access",
+      "path": "docs/licensing/history/LICENSE-CODE",
+      "sha256": "042adabfdf441d62b892f1da6f44f57d4976b6260634fc33de986dc3fdf531f1",
+      "status": "new",
+      "publication_sha256": "00176665ab2fbe71080a02b261745ffc0bcf40c512fbc969ea404f3bb21904d4"
+    },
+    {
+      "archive": "products/access/docs/licensing/history/LICENSE-EXCEPTION.md",
+      "repo": "access",
+      "path": "docs/licensing/history/LICENSE-EXCEPTION.md",
+      "sha256": "8af2a3f7cbc186b31e10fecee3522854d524277c460646ba5544cc8e9acecfef",
+      "status": "new",
+      "publication_sha256": "8af2a3f7cbc186b31e10fecee3522854d524277c460646ba5544cc8e9acecfef"
+    },
+    {
+      "archive": "products/access/pyproject.toml",
+      "repo": "access",
+      "path": "pyproject.toml",
+      "sha256": "cc3d6e29a1c5dd46df83b0f9babdd3e38cc4de13e068b128b8560128a6230225",
+      "status": "changed",
+      "publication_sha256": "0ddb1a0a4948cada6259a33f0b597f939409f0885e1ae23dd22d4882f4679918"
+    },
+    {
+      "archive": "installed-owned-source/civicaccess/__init__.py",
+      "repo": "access",
+      "path": "civicaccess/__init__.py",
+      "sha256": "81d66a6fd270f40a647d62a028bbd33e544d720b24c7e0a3eb52c24c8832a71f",
+      "status": "same",
+      "publication_sha256": "81d66a6fd270f40a647d62a028bbd33e544d720b24c7e0a3eb52c24c8832a71f"
+    },
+    {
+      "archive": "installed-owned-source/civicaccess/access_review.py",
+      "repo": "access",
+      "path": "civicaccess/access_review.py",
+      "sha256": "49d7074b3a20acfdc5033f94e690cff8cfdbeae63e1dd51987bb73d129cc5ee2",
+      "status": "changed",
+      "publication_sha256": "49d7074b3a20acfdc5033f94e690cff8cfdbeae63e1dd51987bb73d129cc5ee2"
+    },
+    {
+      "archive": "installed-owned-source/civicaccess/db_admin.py",
+      "repo": "access",
+      "path": "civicaccess/db_admin.py",
+      "sha256": "2d72bac67b008cbc2a07fbb9db85c08dc9e0d50c6e0a179aad2d3846167a063d",
+      "status": "changed",
+      "publication_sha256": "2d72bac67b008cbc2a07fbb9db85c08dc9e0d50c6e0a179aad2d3846167a063d"
+    },
+    {
+      "archive": "installed-owned-source/civicaccess/exports.py",
+      "repo": "access",
+      "path": "civicaccess/exports.py",
+      "sha256": "b55c9d08e5a12b8b1a0cdc765811efcbdc651becd0cfd1dbe74ffba7a2a77745",
+      "status": "changed",
+      "publication_sha256": "b55c9d08e5a12b8b1a0cdc765811efcbdc651becd0cfd1dbe74ffba7a2a77745"
+    },
+    {
+      "archive": "installed-owned-source/civicaccess/main.py",
+      "repo": "access",
+      "path": "civicaccess/main.py",
+      "sha256": "379d3c880dd949db3325fa055b8822cf5f59a20b8d7c4da3a84a8f12989134ab",
+      "status": "changed",
+      "publication_sha256": "379d3c880dd949db3325fa055b8822cf5f59a20b8d7c4da3a84a8f12989134ab"
+    },
+    {
+      "archive": "installed-owned-source/civicaccess/multilingual.py",
+      "repo": "access",
+      "path": "civicaccess/multilingual.py",
+      "sha256": "a7956cbca7dc27f7b2ad1d3a0786ec9523211cd032cfb4403e28d80f60e4b7f0",
+      "status": "changed",
+      "publication_sha256": "a7956cbca7dc27f7b2ad1d3a0786ec9523211cd032cfb4403e28d80f60e4b7f0"
+    },
+    {
+      "archive": "installed-owned-source/civicaccess/plain_language.py",
+      "repo": "access",
+      "path": "civicaccess/plain_language.py",
+      "sha256": "cc43e184d1b7778c5cb47471cad9f47fd2557973a8fcd952bde41d2a7a63e3cb",
+      "status": "changed",
+      "publication_sha256": "cc43e184d1b7778c5cb47471cad9f47fd2557973a8fcd952bde41d2a7a63e3cb"
+    },
+    {
+      "archive": "installed-owned-source/civicaccess/public_ui.py",
+      "repo": "access",
+      "path": "civicaccess/public_ui.py",
+      "sha256": "5f975f28d9f7a1cd522ac3c4c8e7045042e07c035c4a8bc409479902463379fc",
+      "status": "changed",
+      "publication_sha256": "5f975f28d9f7a1cd522ac3c4c8e7045042e07c035c4a8bc409479902463379fc"
+    },
+    {
+      "archive": "installed-owned-source/civicaccess/workflows.py",
+      "repo": "access",
+      "path": "civicaccess/workflows.py",
+      "sha256": "80ee4dd485ba6b0136842fe75c5b41536091181bd96f41efbaddd5a96ac73c92",
+      "status": "changed",
+      "publication_sha256": "80ee4dd485ba6b0136842fe75c5b41536091181bd96f41efbaddd5a96ac73c92"
+    }
+  ],
+  "identity_note": "Publication commit integrates the already-built candidate; it is not claimed to be the original signing/build commit. Archive paths retain original byte hashes. Documentation entrypoints have a distribution addendum.",
+  "publication_note": "Original accepted bytes remain in the immutable source companion. Canonical sources normalize line endings. Release integration fixes remove a shadowed duplicate class, position imports for lint, format regression/acceptance tools and resolve the paired Core source dependency. Current audited manuals supersede build-time README copies. Each mapped file records both original and publication byte hashes."
+}
