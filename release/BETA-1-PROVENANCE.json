@@ -12,7 +12,7 @@
       "path": "LICENSE",
       "sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e",
       "status": "same",
-      "publication_sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e"
+      "publication_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
     },
     {
       "archive": "products/access/LICENSE-CODE",
@@ -20,7 +20,7 @@
       "path": "LICENSE-CODE",
       "sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e",
       "status": "changed",
-      "publication_sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e"
+      "publication_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
     },
     {
       "archive": "products/access/LICENSE-DOCS",
@@ -28,7 +28,7 @@
       "path": "LICENSE-DOCS",
       "sha256": "d07988f4be47912f75a73b44da8a9c0b602bf6c8ced69de858b848f379ecd973",
       "status": "same",
-      "publication_sha256": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e"
+      "publication_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
     },
     {
       "archive": "products/access/README.md",
@@ -36,7 +36,7 @@
       "path": "README.md",
       "sha256": "2ef82c40da16e88e586e8733261699a1521f6c6d0b968f5391e608aefcdcd4bb",
       "status": "changed",
-      "publication_sha256": "2ef82c40da16e88e586e8733261699a1521f6c6d0b968f5391e608aefcdcd4bb"
+      "publication_sha256": "9bc95a3f8ba47431b70ce41820968810b8aba18ca567daa5cad8aecf462d43d8"
     },
     {
       "archive": "products/access/civicaccess/__init__.py",
