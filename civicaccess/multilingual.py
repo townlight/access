@@ -1,4 +1,4 @@
-"""Multilingual variant helpers for Townlight Access."""
+"""Multilingual variant helpers for CivicAccess."""
 
 from __future__ import annotations
 

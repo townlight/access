@@ -66,7 +66,7 @@ def test_db_status_cli_reports_ready_schema(tmp_path) -> None:
         text=True,
     )
 
-    assert "Townlight Access schema ready" in result.stdout
+    assert "CivicAccess schema ready" in result.stdout
     assert f"version={SCHEMA_VERSION}" in result.stdout
     assert "missing_tables=none" in result.stdout
 
