@@ -6,7 +6,7 @@ Seed posts for the Townlight Access Discussions board, organized by audience. Po
 
 ## For civic staff
 
-<a id="-welcome--what-civicaccess-does-for-your-office"></a>
+<a id="-welcome--what-townlight_access-does-for-your-office"></a>
 
 ### 👋 Welcome — what Townlight Access does for your office
 
@@ -22,7 +22,7 @@ This is an early release (v0.4.0) — great for evaluating and piloting. Tell us
 
 Share examples of public notices, forms, agendas, PDFs, or documents where accessibility and plain-language support would help your city. Real examples shape what we build next.
 
-<a id="where-civicaccess-stops-and-a-human-takes-over"></a>
+<a id="where-townlight_access-stops-and-a-human-takes-over"></a>
 
 ### Where Townlight Access stops (and a human takes over)
 
@@ -34,21 +34,21 @@ Townlight Access is a tool for your staff, **not a rubber stamp.** It does not g
 
 ### Architecture & how it runs
 
-Townlight Access is a deterministic **FastAPI** module (no model/LLM calls, no outbound network), pinned to the published **Townlight Core v1.2.0** release wheel. In Townlight Windows Local, a Tauri supervisor runs it against a bundled PostgreSQL on `127.0.0.1:15432` (dedicated `civicaccess` schema); the supervisor's backup captures the whole data directory.
+Townlight Access is a deterministic **FastAPI** module (no model/LLM calls, no outbound network), pinned to the published **Townlight Core v1.2.0** release wheel. In Townlight Windows Local, a Tauri supervisor runs it against a bundled PostgreSQL on `127.0.0.1:15432` (dedicated `townlight_access` schema); the supervisor's backup captures the whole data directory.
 
 ```mermaid
 flowchart TB
-  Resident["Resident (browser)"] -->|"public, read-only"| Pub["/civicaccess"]
-  Staff["City staff (browser)"] -->|"WebView2 UI"| StaffUI["/civicaccess/staff"]
+  Resident["Resident (browser)"] -->|"public, read-only"| Pub["/townlight_access"]
+  Staff["City staff (browser)"] -->|"WebView2 UI"| StaffUI["/townlight_access/staff"]
   subgraph Sup["Tauri supervisor — local machine only"]
-    CA["CivicAccess (FastAPI)"]
+    CA["Townlight Access (FastAPI)"]
     PG[("Bundled PostgreSQL :15432")]
   end
   Pub --> CA
   StaffUI --> CA
-  CA -->|"DATABASE_URL → civicaccess schema"| PG
-  CA -->|"depends on"| Core["CivicCore v1.2.0"]
-  CA -. records-export .-> Records["CivicRecords AI"]
+  CA -->|"DATABASE_URL → townlight_access schema"| PG
+  CA -->|"depends on"| Core["Townlight Core v1.2.0"]
+  CA -. records-export .-> Records["Townlight Records"]
 ```
 
 Full API, data model, and security details: [README](../README.md) · [User Manual, Part 2](../USER-MANUAL.md#part-2--for-it--technical-staff).
@@ -58,18 +58,18 @@ Full API, data model, and security details: [README](../README.md) · [User Manu
 City-core hardening (closes probe gaps #2/#3/#4):
 
 - **Persistence** now defaults to the shared Townlight Core PostgreSQL (reads the supervisor's `DATABASE_URL`); SQLite is a dev fallback.
-- **Write authz:** persistence routes (`/review`, `/reviews/{id}/records-export`) require `X-CivicAccess-Write-Token` (constant-time; 403 invalid / 503 if unconfigured). A new stateless `POST /analyze` powers the public surface so it never writes.
+- **Write authz:** persistence routes (`/review`, `/reviews/{id}/records-export`) require `X-Townlight Access-Write-Token` (constant-time; 403 invalid / 503 if unconfigured). A new stateless `POST /analyze` powers the public surface so it never writes.
 - **Audit:** every write/export persists an `audit_events` row; `review.create` is atomic with the record.
 - The earlier `v1.0.0` tag was published in error and is retained only as historical evidence.
 
 ### Running it locally & the release gate
 
 ```bash
-python -m pip install https://github.com/townlight/core/releases/download/v1.2.0/civiccore-1.2.0-py3-none-any.whl
+python -m pip install https://github.com/townlight/core/releases/download/v1.2.0/townlight_core-1.2.0-py3-none-any.whl
 python -m pip install -e ".[dev]"
 python -m pytest -q
 # Full release gate requires a real PostgreSQL:
-export CIVICACCESS_POSTGRES_TEST_URL="postgresql+psycopg2://USER:PW@HOST:PORT/DB"
+export TOWNLIGHT_ACCESS_POSTGRES_TEST_URL="postgresql+psycopg2://USER:PW@HOST:PORT/DB"
 bash scripts/verify-release.sh
 ```
 

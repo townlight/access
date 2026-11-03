@@ -1,6 +1,14 @@
 # Changelog
 
-All notable changes to CivicAccess will be documented in this file.
+## [0.5.0] - Unreleased naming candidate
+
+- Rename the principal distribution/import to the Townlight Access identities and pair with Townlight Core 1.3.0.dev2.
+- Preserve complete saved review exports and durable source/output draft provenance in the Windows workflow; distinguish standalone samples from model-generated translations.
+- Fresh-install candidate only; no legacy database upgrade or import shim. Existing data and historical release identities are preserved.
+- Signed Windows installer acceptance and publication remain pending; source implementation is not installed verification.
+
+
+All notable changes to Townlight Access will be documented in this file.
 
 The format follows Keep a Changelog, and this project follows Semantic Versioning.
 

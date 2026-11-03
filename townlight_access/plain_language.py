@@ -1,10 +1,10 @@
-"""Plain-language rewrite helpers for CivicAccess."""
+"""Plain-language rewrite helpers for Townlight Access."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 
-from civicaccess.access_review import DISCLAIMER
+from townlight_access.access_review import DISCLAIMER
 
 
 @dataclass(frozen=True)

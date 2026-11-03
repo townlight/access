@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-VERSION="0.4.0"
+VERSION="0.5.0"
 
 find_python() {
   local candidates=()
-  if [[ -n "${CIVICACCESS_RELEASE_PYTHON:-}" ]]; then
-    candidates+=("${CIVICACCESS_RELEASE_PYTHON}")
+  if [[ -n "${TOWNLIGHT_ACCESS_RELEASE_PYTHON:-}" ]]; then
+    candidates+=("${TOWNLIGHT_ACCESS_RELEASE_PYTHON}")
   fi
   command -v python >/dev/null 2>&1 && candidates+=("$(command -v python)")
   command -v python3 >/dev/null 2>&1 && candidates+=("$(command -v python3)")
@@ -40,12 +40,12 @@ ${PYTHON_BIN} - <<'PY'
 from pathlib import Path
 import tomllib
 
-version = "0.4.0"
+version = "0.5.0"
 root = Path(".")
 pyproject = tomllib.loads((root / "pyproject.toml").read_text(encoding="utf-8"))
 assert pyproject["project"]["version"] == version, pyproject["project"]["version"]
 namespace: dict[str, str] = {}
-exec((root / "civicaccess" / "__init__.py").read_text(encoding="utf-8"), namespace)
+exec((root / "townlight_access" / "__init__.py").read_text(encoding="utf-8"), namespace)
 assert namespace["__version__"] == version, namespace["__version__"]
 for path in [
     "README.md",
@@ -58,7 +58,7 @@ for path in [
     text = (root / path).read_text(encoding="utf-8")
     assert version in text, f"missing release version in {path}"
     assert "0.1.0.dev0" not in text, f"stale dev version in {path}"
-for source in sorted((root / "civicaccess").glob("*.py")):
+for source in sorted((root / "townlight_access").glob("*.py")):
     assert "v1.0.0" not in source.read_text(encoding="utf-8"), (
         f"discredited v1.0.0 label in {source.as_posix()} (the false release; do not reintroduce)"
     )
@@ -66,14 +66,14 @@ print("PASS: version surfaces synchronized")
 PY
 
 echo "==> Test suite"
-if [[ -z "${CIVICACCESS_POSTGRES_TEST_URL:-}" ]]; then
-  echo "FAIL: CIVICACCESS_POSTGRES_TEST_URL is required for the release gate so PostgreSQL persistence coverage cannot be skipped." >&2
+if [[ -z "${TOWNLIGHT_ACCESS_POSTGRES_TEST_URL:-}" ]]; then
+  echo "FAIL: TOWNLIGHT_ACCESS_POSTGRES_TEST_URL is required for the release gate so PostgreSQL persistence coverage cannot be skipped." >&2
   exit 1
 fi
 ${PYTHON_BIN} - <<'PY'
 import os
-assert os.environ.get("CIVICACCESS_POSTGRES_TEST_URL"), (
-    "CIVICACCESS_POSTGRES_TEST_URL is not visible to the selected Python interpreter."
+assert os.environ.get("TOWNLIGHT_ACCESS_POSTGRES_TEST_URL"), (
+    "TOWNLIGHT_ACCESS_POSTGRES_TEST_URL is not visible to the selected Python interpreter."
 )
 print("PASS: PostgreSQL test URL is visible to the selected Python interpreter")
 PY
@@ -83,7 +83,7 @@ echo "==> Documentation gate"
 bash scripts/verify-docs.sh
 
 echo "==> Placeholder import gate"
-${PYTHON_BIN} scripts/check-civiccore-placeholder-imports.py
+${PYTHON_BIN} scripts/check-townlight_core-placeholder-imports.py
 
 echo "==> Ruff"
 ${PYTHON_BIN} -m ruff check .
@@ -96,8 +96,8 @@ from pathlib import Path
 import hashlib
 
 dist = Path("dist")
-wheel = dist / "civicaccess-0.4.0-py3-none-any.whl"
-sdist = dist / "civicaccess-0.4.0.tar.gz"
+wheel = dist / "townlight_access-0.5.0-py3-none-any.whl"
+sdist = dist / "townlight_access-0.5.0.tar.gz"
 assert wheel.exists(), f"missing {wheel}"
 assert sdist.exists(), f"missing {sdist}"
 lines = []

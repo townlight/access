@@ -1,11 +1,11 @@
 from fastapi.testclient import TestClient
 
-from civicaccess.access_review import review_accessibility
-from civicaccess.exports import build_accessible_export
-from civicaccess.main import app
-from civicaccess.multilingual import create_language_variant
-from civicaccess.plain_language import rewrite_plain_language
-from civicaccess.workflows import (
+from townlight_access.access_review import review_accessibility
+from townlight_access.exports import build_accessible_export
+from townlight_access.main import app
+from townlight_access.multilingual import create_language_variant
+from townlight_access.plain_language import rewrite_plain_language
+from townlight_access.workflows import (
     build_accessible_form_plan,
     build_ada_title_ii_review_plan,
     build_publishing_workflow_plan,
@@ -73,9 +73,9 @@ def test_workflow_helpers_cover_public_use_scope() -> None:
 
 def test_api_review_success_shape() -> None:
     response = client.post(
-        "/api/v1/civicaccess/review",
+        "/api/v1/townlight_access/review",
         json={"title": "", "body": "A public notice.", "has_alt_text": False, "language": "en"},
-        headers={"X-CivicAccess-Write-Token": "test-write-token"},
+        headers={"X-Townlight-Access-Write-Token": "test-write-token"},
     )
 
     assert response.status_code == 200
@@ -88,7 +88,7 @@ def test_api_review_success_shape() -> None:
 
 def test_api_analyze_is_public_and_stateless() -> None:
     response = client.post(
-        "/api/v1/civicaccess/analyze",
+        "/api/v1/townlight_access/analyze",
         json={"title": "", "body": "A public notice.", "has_alt_text": False, "language": "en"},
     )
 
@@ -102,9 +102,9 @@ def test_api_analyze_is_public_and_stateless() -> None:
 
 
 def test_api_review_validation_is_actionable() -> None:
-    missing = client.post("/api/v1/civicaccess/review", json={"title": "Notice"})
+    missing = client.post("/api/v1/townlight_access/review", json={"title": "Notice"})
     oversized = client.post(
-        "/api/v1/civicaccess/review",
+        "/api/v1/townlight_access/review",
         json={"title": "Notice", "body": "x" * 5001, "has_alt_text": True, "language": "en"},
     )
 
@@ -118,11 +118,11 @@ def test_api_review_validation_is_actionable() -> None:
 
 def test_api_plain_language_and_language_variant() -> None:
     plain = client.post(
-        "/api/v1/civicaccess/plain-language",
+        "/api/v1/townlight_access/plain-language",
         json={"text": "Please remit payment prior to the deadline."},
     )
     variant = client.post(
-        "/api/v1/civicaccess/language-variant",
+        "/api/v1/townlight_access/language-variant",
         json={"text": "Contact the city for help.", "language": "vi"},
     )
 
@@ -134,11 +134,11 @@ def test_api_plain_language_and_language_variant() -> None:
 
 def test_api_public_use_workflow_routes() -> None:
     form = client.post(
-        "/api/v1/civicaccess/forms",
+        "/api/v1/townlight_access/forms",
         json={"form_name": "Public Records Request", "fields": ["name", "contact", "request"]},
     )
     workflow = client.post(
-        "/api/v1/civicaccess/publishing-workflow",
+        "/api/v1/townlight_access/publishing-workflow",
         json={
             "title": "Budget Hearing",
             "has_review": True,
@@ -147,11 +147,11 @@ def test_api_public_use_workflow_routes() -> None:
         },
     )
     ada = client.post(
-        "/api/v1/civicaccess/ada-title-ii",
+        "/api/v1/townlight_access/ada-title-ii",
         json={"service_area": "Public meetings", "has_coordinator_review": True},
     )
-    pdf = client.post("/api/v1/civicaccess/tagged-pdf", json={"heading_levels": [1, 2, 3]})
-    export = client.post("/api/v1/civicaccess/export", json={"title": "Budget", "format": "pdf"})
+    pdf = client.post("/api/v1/townlight_access/tagged-pdf", json={"heading_levels": [1, 2, 3]})
+    export = client.post("/api/v1/townlight_access/export", json={"title": "Budget", "format": "pdf"})
 
     assert form.json()["status"] == "form-plan-created"
     assert workflow.json()["status"] == "publication-workflow-created"
@@ -163,19 +163,19 @@ def test_api_public_use_workflow_routes() -> None:
 
 def test_adversarial_inputs_are_actionable_and_non_certifying() -> None:
     empty_review = client.post(
-        "/api/v1/civicaccess/analyze",
+        "/api/v1/townlight_access/analyze",
         json={"title": "", "body": "", "has_alt_text": False, "language": "en"},
     )
     unsupported_language = client.post(
-        "/api/v1/civicaccess/language-variant",
+        "/api/v1/townlight_access/language-variant",
         json={"text": "Contact the city.", "language": "tlh"},
     )
     unsupported_export = client.post(
-        "/api/v1/civicaccess/export",
+        "/api/v1/townlight_access/export",
         json={"title": "Budget", "format": "docx"},
     )
-    blocked_workflow = client.post("/api/v1/civicaccess/publishing-workflow", json={})
-    bad_pdf = client.post("/api/v1/civicaccess/tagged-pdf", json={"heading_levels": [2, 4]})
+    blocked_workflow = client.post("/api/v1/townlight_access/publishing-workflow", json={})
+    bad_pdf = client.post("/api/v1/townlight_access/tagged-pdf", json={"heading_levels": [2, 4]})
 
     assert empty_review.json()["findings"][0]["code"] == "missing-body"
     assert unsupported_language.json()["status"] == "unsupported-language-placeholder"
@@ -189,16 +189,16 @@ def test_adversarial_inputs_are_actionable_and_non_certifying() -> None:
 
 
 def test_public_ui_route_is_accessible_and_honest() -> None:
-    response = client.get("/civicaccess")
+    response = client.get("/townlight_access")
 
     assert response.status_code == 200
     assert "text/html" in response.headers["content-type"]
     text = response.text
     assert '<a class="skip-link" href="#main">Skip to main content</a>' in text
     assert '<main id="main" tabindex="-1">' in text
-    assert "v0.4.0 standalone readiness candidate" in text
+    assert "v0.5.0 standalone readiness candidate" in text
     assert 'id="runReview"' in text
-    assert 'fetch("/api/v1/civicaccess/analyze"' in text
+    assert 'fetch("/api/v1/townlight_access/analyze"' in text
     assert "result.replaceChildren()" in text
     assert "result.innerHTML" not in text
     assert "Show empty state" not in text
@@ -211,26 +211,26 @@ def test_public_ui_route_is_accessible_and_honest() -> None:
 
 
 def test_staff_ui_route_is_api_wired_and_contract_aware() -> None:
-    response = client.get("/civicaccess/staff")
+    response = client.get("/townlight_access/staff")
 
     assert response.status_code == 200
     assert "text/html" in response.headers["content-type"]
     text = response.text
     assert '<a class="skip-link" href="#main">Skip to main content</a>' in text
     assert "Saved review queue" in text
-    assert 'fetch("/api/v1/civicaccess/readiness")' in text
-    assert 'fetch("/api/v1/civicaccess/integration-contracts")' in text
-    assert 'fetch("/api/v1/civicaccess/reviews")' in text
+    assert 'fetch("/api/v1/townlight_access/readiness")' in text
+    assert 'fetch("/api/v1/townlight_access/integration-contracts")' in text
+    assert 'fetch("/api/v1/townlight_access/reviews")' in text
     assert 'records-export' in text
-    assert "X-CivicAccess-Write-Token" in text
+    assert "X-Townlight-Access-Write-Token" in text
     assert 'id="writeToken"' in text
     assert "currentToken()" in text
     assert "result.innerHTML" not in text
 
 
 def test_staff_page_never_leaks_the_write_token(monkeypatch) -> None:
-    monkeypatch.setenv("CIVICACCESS_TRUSTED_WRITE_TOKEN", "super-secret-sentinel-do-not-leak")
-    response = client.get("/civicaccess/staff")
+    monkeypatch.setenv("TOWNLIGHT_ACCESS_TRUSTED_WRITE_TOKEN", "super-secret-sentinel-do-not-leak")
+    response = client.get("/townlight_access/staff")
 
     assert response.status_code == 200
     # The server secret must never appear in HTML served from an unauthenticated GET.

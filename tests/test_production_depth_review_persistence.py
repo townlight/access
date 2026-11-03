@@ -3,9 +3,9 @@ import sys
 
 from fastapi.testclient import TestClient
 
-import civicaccess.main as main_module
-from civicaccess.access_review import SCHEMA_VERSION, AccessibilityReviewRepository
-from civicaccess.main import app
+import townlight_access.main as main_module
+from townlight_access.access_review import SCHEMA_VERSION, AccessibilityReviewRepository
+from townlight_access.main import app
 
 
 client = TestClient(app)
@@ -57,7 +57,7 @@ def test_db_status_cli_reports_ready_schema(tmp_path) -> None:
         [
             sys.executable,
             "-m",
-            "civicaccess.db_admin",
+            "townlight_access.db_admin",
             "--db-url",
             f"sqlite:///{db_path}",
         ],
@@ -66,23 +66,23 @@ def test_db_status_cli_reports_ready_schema(tmp_path) -> None:
         text=True,
     )
 
-    assert "CivicAccess schema ready" in result.stdout
+    assert "Townlight Access schema ready" in result.stdout
     assert f"version={SCHEMA_VERSION}" in result.stdout
     assert "missing_tables=none" in result.stdout
 
 
 def test_api_persists_and_retrieves_review_records(monkeypatch, tmp_path) -> None:
     db_path = tmp_path / "api-reviews.db"
-    monkeypatch.setenv("CIVICACCESS_REVIEW_DB_URL", f"sqlite:///{db_path}")
+    monkeypatch.setenv("TOWNLIGHT_ACCESS_REVIEW_DB_URL", f"sqlite:///{db_path}")
 
     try:
         create_response = client.post(
-            "/api/v1/civicaccess/review",
+            "/api/v1/townlight_access/review",
             json={"title": "", "body": "A public notice.", "has_alt_text": False, "language": "en"},
-            headers={"X-CivicAccess-Write-Token": "test-write-token"},
+            headers={"X-Townlight-Access-Write-Token": "test-write-token"},
         )
         review_id = create_response.json()["review_id"]
-        get_response = client.get(f"/api/v1/civicaccess/reviews/{review_id}")
+        get_response = client.get(f"/api/v1/townlight_access/reviews/{review_id}")
     finally:
         main_module._dispose_review_repository()
         main_module._review_db_url = None
@@ -98,11 +98,11 @@ def test_api_persists_and_retrieves_review_records(monkeypatch, tmp_path) -> Non
 
 
 def test_default_local_database_makes_readiness_ready(monkeypatch, tmp_path) -> None:
-    monkeypatch.delenv("CIVICACCESS_REVIEW_DB_URL", raising=False)
-    monkeypatch.setenv("CIVICACCESS_DATA_DIR", str(tmp_path / "civicaccess-data"))
+    monkeypatch.delenv("TOWNLIGHT_ACCESS_REVIEW_DB_URL", raising=False)
+    monkeypatch.setenv("TOWNLIGHT_ACCESS_DATA_DIR", str(tmp_path / "townlight_access-data"))
 
     try:
-        response = client.get("/api/v1/civicaccess/readiness")
+        response = client.get("/api/v1/townlight_access/readiness")
     finally:
         main_module._dispose_review_repository()
         main_module._review_db_url = None
@@ -114,12 +114,12 @@ def test_default_local_database_makes_readiness_ready(monkeypatch, tmp_path) -> 
     assert payload["review_database_configured"] is True
     assert payload["schema_ready"] is True
     assert payload["blockers"] == []
-    assert "civicaccess-reviews.db" in payload["review_database_url"]
+    assert "review_database_url" not in payload
 
 
 def test_readiness_passes_with_configured_schema(monkeypatch, tmp_path) -> None:
     db_path = tmp_path / "ready-runtime.db"
-    monkeypatch.setenv("CIVICACCESS_REVIEW_DB_URL", f"sqlite:///{db_path}")
+    monkeypatch.setenv("TOWNLIGHT_ACCESS_REVIEW_DB_URL", f"sqlite:///{db_path}")
 
     try:
         response = client.get("/ready")
@@ -141,10 +141,10 @@ def test_readiness_passes_with_configured_schema(monkeypatch, tmp_path) -> None:
 
 def test_review_record_lookup_reports_missing_record(monkeypatch, tmp_path) -> None:
     db_path = tmp_path / "missing-review.db"
-    monkeypatch.setenv("CIVICACCESS_REVIEW_DB_URL", f"sqlite:///{db_path}")
+    monkeypatch.setenv("TOWNLIGHT_ACCESS_REVIEW_DB_URL", f"sqlite:///{db_path}")
 
     try:
-        response = client.get("/api/v1/civicaccess/reviews/00000000-0000-4000-8000-000000000000")
+        response = client.get("/api/v1/townlight_access/reviews/00000000-0000-4000-8000-000000000000")
     finally:
         main_module._dispose_review_repository()
         main_module._review_db_url = None
@@ -155,11 +155,11 @@ def test_review_record_lookup_reports_missing_record(monkeypatch, tmp_path) -> N
 
 
 def test_review_record_lookup_uses_default_database(monkeypatch, tmp_path) -> None:
-    monkeypatch.delenv("CIVICACCESS_REVIEW_DB_URL", raising=False)
-    monkeypatch.setenv("CIVICACCESS_DATA_DIR", str(tmp_path / "default-data"))
+    monkeypatch.delenv("TOWNLIGHT_ACCESS_REVIEW_DB_URL", raising=False)
+    monkeypatch.setenv("TOWNLIGHT_ACCESS_DATA_DIR", str(tmp_path / "default-data"))
 
     try:
-        response = client.get("/api/v1/civicaccess/reviews/not-configured")
+        response = client.get("/api/v1/townlight_access/reviews/not-configured")
     finally:
         main_module._dispose_review_repository()
         main_module._review_db_url = None
@@ -170,26 +170,26 @@ def test_review_record_lookup_uses_default_database(monkeypatch, tmp_path) -> No
 
 def test_review_list_and_records_export_contract(monkeypatch, tmp_path) -> None:
     db_path = tmp_path / "api-review-list.db"
-    monkeypatch.setenv("CIVICACCESS_REVIEW_DB_URL", f"sqlite:///{db_path}")
+    monkeypatch.setenv("TOWNLIGHT_ACCESS_REVIEW_DB_URL", f"sqlite:///{db_path}")
 
     try:
         create_response = client.post(
-            "/api/v1/civicaccess/review",
+            "/api/v1/townlight_access/review",
             json={
                 "title": "Budget hearing notice",
                 "body": "Residents may ask for help before the hearing.",
                 "has_alt_text": True,
                 "language": "en",
             },
-            headers={"X-CivicAccess-Write-Token": "test-write-token"},
+            headers={"X-Townlight-Access-Write-Token": "test-write-token"},
         )
         review_id = create_response.json()["review_id"]
-        list_response = client.get("/api/v1/civicaccess/reviews")
+        list_response = client.get("/api/v1/townlight_access/reviews")
         export_response = client.post(
-            f"/api/v1/civicaccess/reviews/{review_id}/records-export",
-            headers={"X-CivicAccess-Write-Token": "test-write-token"},
+            f"/api/v1/townlight_access/reviews/{review_id}/records-export",
+            headers={"X-Townlight-Access-Write-Token": "test-write-token"},
         )
-        contracts_response = client.get("/api/v1/civicaccess/integration-contracts")
+        contracts_response = client.get("/api/v1/townlight_access/integration-contracts")
     finally:
         main_module._dispose_review_repository()
         main_module._review_db_url = None
@@ -200,9 +200,9 @@ def test_review_list_and_records_export_contract(monkeypatch, tmp_path) -> None:
     assert export_response.status_code == 200
     export_payload = export_response.json()
     assert export_payload["status"] == "records-export-ready"
-    assert export_payload["target_module"] == "civicrecords-ai"
+    assert export_payload["target_module"] == "townlight_records"
     assert export_payload["provenance"]["source_text_preserved"] is True
     contracts = contracts_response.json()
     assert contracts["status"] == "ok"
-    assert "civicpermit applicant forms" in contracts["downstream_ready_for"]
+    assert "townlight_permitting applicant forms" in contracts["downstream_ready_for"]
     db_path.unlink()

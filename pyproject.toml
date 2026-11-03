@@ -3,18 +3,18 @@ requires = ["hatchling>=1.27.0"]
 build-backend = "hatchling.build"
 
 [project]
-name = "civicaccess"
-version = "0.4.0"
-description = "civicaccess runtime foundation for accessibility, plain-language, multilingual, and ADA review support."
+name = "townlight-access"
+version = "0.5.0"
+description = "townlight_access runtime foundation for accessibility, plain-language, multilingual, and ADA review support."
 readme = "README.md"
 requires-python = ">=3.11"
 license = "AGPL-3.0-only"
 license-files = ["LICENSE", "LICENSE-CODE"]
 authors = [
-  { name = "CivicSuite contributors" }
+  { name = "Townlight contributors" }
 ]
 dependencies = [
-  "civiccore @ https://github.com/townlight/core/releases/download/v1.2.0/civiccore-1.2.0-py3-none-any.whl#sha256=a94ce958e36fb03c8d961e4db4672ce5bcfa25765c57d75886e999cf15703ec7",
+  "townlight-core==1.3.0.dev2",
   "fastapi>=0.115.0,<1.0.0",
   "psycopg2-binary>=2.9.0,<3.0.0",
   "sqlalchemy>=2.0.0,<3.0.0",
@@ -22,7 +22,7 @@ dependencies = [
 ]
 
 [project.scripts]
-civicaccess-db-status = "civicaccess.db_admin:main"
+townlight_access-db-status = "townlight_access.db_admin:main"
 
 [tool.hatch.metadata]
 allow-direct-references = true
@@ -39,11 +39,11 @@ dev = [
 testpaths = ["tests"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["civicaccess"]
+packages = ["townlight_access"]
 
 [tool.hatch.build.targets.sdist]
 include = [
-  "civicaccess",
+  "townlight_access",
   "scripts",
   "tests",
   "README.md",

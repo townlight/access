@@ -1,19 +1,21 @@
-"""Multilingual variant helpers for CivicAccess."""
+"""Multilingual variant helpers for Townlight Access."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 
-from civicaccess.access_review import DISCLAIMER
+from townlight_access.access_review import DISCLAIMER
 
 
 @dataclass(frozen=True)
 class LanguageVariant:
+    source_text: str
     language: str
     text: str
     review_required: bool
     status: str
     fix: str
+    translation_performed: bool = False
     disclaimer: str = DISCLAIMER
 
 
@@ -29,13 +31,15 @@ def create_language_variant(*, text: str, language: str) -> LanguageVariant:
     normalized = language.strip().casefold()
     if normalized in SAMPLE_VARIANTS:
         return LanguageVariant(
+            source_text=text,
             language=language,
             text=SAMPLE_VARIANTS[normalized],
             review_required=True,
             status="sample-created",
-            fix="Route this sample to a qualified human reviewer before publication.",
+            fix="This fixed sample does not translate your input. Use the Windows local-model draft workflow or a qualified translator for the actual source text; qualified human review remains required.",
         )
     return LanguageVariant(
+        source_text=text,
         language=language,
         text=f"Sample variant placeholder for {language}: {text.strip()}",
         review_required=True,
