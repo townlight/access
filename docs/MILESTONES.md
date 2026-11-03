@@ -1,4 +1,4 @@
-<a id="civicaccess-milestones"></a>
+<a id="townlight_access-milestones"></a>
 
 # Townlight Access Milestones
 
@@ -24,7 +24,7 @@ Accessible export checklist, tagged-PDF expectations, and provenance notes.
 
 ## Milestone 6 - Public UI
 
-Functional public page at `/civicaccess` with loading, success, empty, error, and partial/degraded states.
+Functional public page at `/townlight_access` with loading, success, empty, error, and partial/degraded states.
 
 ## Milestone 7 - v0.1.x Foundation Releases
 

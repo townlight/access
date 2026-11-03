@@ -1,17 +1,17 @@
-"""Public UI for CivicAccess."""
+"""Public UI for Townlight Access."""
 
 from __future__ import annotations
 
 
 def render_public_lookup_page() -> str:
-    """Render the accessible public-facing CivicAccess review page."""
+    """Render the accessible public-facing Townlight Access review page."""
 
     return """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CivicAccess Public Accessibility Support</title>
+<title>Townlight Access Public Accessibility Support</title>
 <style>
   :root { --ink:#17202a; --muted:#56606a; --paper:#fffdf7; --blue:#175b83; --green:#2f6b50; --gold:#d8b45b; --line:#d7c8a8; --danger:#9a3d2f; }
   * { box-sizing: border-box; }
@@ -50,10 +50,10 @@ def render_public_lookup_page() -> str:
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header>
-  <p class="eyebrow">CivicSuite / CivicAccess</p>
+  <p class="eyebrow">Townlight / Townlight Access</p>
   <h1>Make public information easier to read, reach, and preserve.</h1>
-  <p class="lede">CivicAccess gives staff a deterministic review path for accessible forms, public notices, plain-language rewrites, multilingual samples, ADA Title II review support, tagged-PDF expectations, and municipal-record exports.</p>
-  <p><span class="badge">v0.4.0 standalone readiness candidate</span></p>
+  <p class="lede">Townlight Access gives staff a deterministic review path for accessible forms, public notices, plain-language rewrites, multilingual samples, ADA Title II review support, tagged-PDF expectations, and municipal-record exports.</p>
+  <p><span class="badge">v0.5.0 standalone readiness candidate</span></p>
 </header>
 <main id="main" tabindex="-1">
   <section class="grid" aria-labelledby="review-title">
@@ -68,7 +68,7 @@ def render_public_lookup_page() -> str:
       <button id="runReview" type="button">Run review</button>
       <div id="reviewResult" class="result pending" role="status" aria-live="polite">
         <h3>Partial review pending</h3>
-        <p>Add or confirm the notice fields, then run the review. CivicAccess will show actionable fixes before staff publication review.</p>
+        <p>Add or confirm the notice fields, then run the review. Townlight Access will show actionable fixes before staff publication review.</p>
       </div>
     </article>
     <article class="panel">
@@ -83,8 +83,8 @@ def render_public_lookup_page() -> str:
     </article>
     <article class="panel">
       <p class="kicker">Multilingual support</p>
-      <h2>Human-reviewed variants</h2>
-      <div class="result"><p>Spanish and Vietnamese samples are marked as draft variants that need qualified human review before publication.</p></div>
+      <h2>Fixed language samples</h2>
+      <div class="result"><p>The standalone Spanish and Vietnamese responses are fixed samples. They do not translate your input. The Windows local-model draft workflow is separate and requires qualified review of the actual source and output.</p></div>
     </article>
     <article class="panel">
       <p class="kicker">Tagged PDF</p>
@@ -99,7 +99,7 @@ def render_public_lookup_page() -> str:
     <article class="panel">
       <p class="kicker">ADA boundary</p>
       <h2>Support, not certification</h2>
-      <div class="result warning"><p>CivicAccess does not provide legal advice, certified ADA compliance, official translation certification, or final publication approval. ADA coordinators and qualified reviewers remain responsible for official decisions.</p></div>
+      <div class="result warning"><p>Townlight Access does not provide legal advice, certified ADA compliance, official translation certification, or final publication approval. ADA coordinators and qualified reviewers remain responsible for official decisions.</p></div>
     </article>
   </section>
   <section class="notice" aria-labelledby="boundary-title">
@@ -107,7 +107,7 @@ def render_public_lookup_page() -> str:
     <p>Every output is advisory support. Staff must review fixes, translation drafts, ADA Title II notes, and export packages before publication.</p>
   </section>
 </main>
-<footer><p>CivicAccess is part of the Apache 2.0 CivicSuite open-source municipal AI project.</p></footer>
+<footer><p>Townlight Access is part of the Apache 2.0 Townlight open-source municipal AI project.</p></footer>
 <script>
   const result = document.getElementById("reviewResult");
   const title = document.getElementById("title");
@@ -146,7 +146,7 @@ def render_public_lookup_page() -> str:
     setResult("pending", "Loading review", "Checking the notice text and publication fields.", []);
     runReview.disabled = true;
     try {
-      const response = await fetch("/api/v1/civicaccess/analyze", {
+      const response = await fetch("/api/v1/townlight_access/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -170,7 +170,7 @@ def render_public_lookup_page() -> str:
         setResult("warning", "Review needs staff attention", payload.disclaimer || "Staff review is required before publication.", []);
       }
     } catch (error) {
-      setResult("warning", "Review could not finish", error.message || "Check that the notice text is present, then run the review again. If this happens in the installed stack, staff should check the CivicAccess service health endpoint.", []);
+      setResult("warning", "Review could not finish", error.message || "Check that the notice text is present, then run the review again. If this happens in the installed stack, staff should check the Townlight Access service health endpoint.", []);
     } finally {
       runReview.disabled = false;
     }
@@ -182,10 +182,10 @@ def render_public_lookup_page() -> str:
 
 
 def render_staff_page() -> str:
-    """Render the staff review workspace for saved CivicAccess work.
+    """Render the staff review workspace for saved Townlight Access work.
 
     The page never embeds the server write token. Staff paste it into a field; it is kept in
-    sessionStorage and sent as the X-CivicAccess-Write-Token header on save/export only.
+    sessionStorage and sent as the X-Townlight-Access-Write-Token header on save/export only.
     """
 
     return """<!DOCTYPE html>
@@ -193,7 +193,7 @@ def render_staff_page() -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CivicAccess Staff Workspace</title>
+<title>Townlight Access Staff Workspace</title>
 <style>
   :root { --ink:#17202a; --muted:#56606a; --paper:#fffdf7; --blue:#175b83; --green:#2f6b50; --gold:#d8b45b; --line:#d7c8a8; --danger:#9a3d2f; }
   * { box-sizing: border-box; }
@@ -231,9 +231,9 @@ def render_staff_page() -> str:
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header>
-  <p class="eyebrow">CivicSuite / CivicAccess staff</p>
+  <p class="eyebrow">Townlight / Townlight Access staff</p>
   <h1>Review, preserve, and export accessible publication work.</h1>
-  <p class="lede">This workspace gives staff a saved local queue for accessibility reviews, records-ready exports, and downstream publication contracts used by other CivicSuite modules.</p>
+  <p class="lede">This workspace gives staff a saved local queue for accessibility reviews, records-ready exports, and downstream publication contracts used by other Townlight modules.</p>
 </header>
 <main id="main" tabindex="-1">
   <section class="grid" aria-labelledby="new-review-title">
@@ -245,7 +245,7 @@ def render_staff_page() -> str:
       <textarea id="body" rows="6">Residents may request an accommodation before the meeting.</textarea>
       <label><input id="altText" type="checkbox" style="width:auto"> Images already have alt text</label>
       <label for="writeToken">Staff write token</label>
-      <input id="writeToken" type="password" autocomplete="off" placeholder="Paste the CivicAccess write token to save or export">
+      <input id="writeToken" type="password" autocomplete="off" placeholder="Paste the Townlight Access write token to save or export">
       <button id="createReview" type="button">Save review</button>
       <div id="createStatus" class="result" role="status" aria-live="polite">
         <p>Saving and exporting require the staff write token. Paste it above; it stays in this browser session only.</p>
@@ -264,7 +264,7 @@ def render_staff_page() -> str:
     </article>
   </section>
 </main>
-<footer><p>CivicAccess staff outputs are advisory. Staff approval, qualified translation review, and ADA coordinator review remain required for official publication decisions.</p></footer>
+<footer><p>Townlight Access staff outputs are advisory. Staff approval, qualified translation review, and ADA coordinator review remain required for official publication decisions.</p></footer>
 <script>
   const title = document.getElementById("title");
   const body = document.getElementById("body");
@@ -273,11 +273,11 @@ def render_staff_page() -> str:
   const createReview = document.getElementById("createReview");
   const createStatus = document.getElementById("createStatus");
 
-  const savedToken = sessionStorage.getItem("civicaccessWriteToken");
+  const savedToken = sessionStorage.getItem("townlight_accessWriteToken");
   if (savedToken) writeToken.value = savedToken;
   function currentToken() {
     const value = writeToken.value.trim();
-    if (value) sessionStorage.setItem("civicaccessWriteToken", value);
+    if (value) sessionStorage.setItem("townlight_accessWriteToken", value);
     return value;
   }
   const readiness = document.getElementById("readiness");
@@ -296,18 +296,18 @@ def render_staff_page() -> str:
   }
 
   async function loadReadiness() {
-    const payload = await (await fetch("/api/v1/civicaccess/readiness")).json();
+    const payload = await (await fetch("/api/v1/townlight_access/readiness")).json();
     replaceWithText(readiness, payload.ready ? "Ready" : "Needs setup", payload.ready ? `Review database ready. Saved reviews: ${payload.review_count}.` : (payload.blockers || []).join(" "), !payload.ready);
   }
 
   async function loadContracts() {
-    const payload = await (await fetch("/api/v1/civicaccess/integration-contracts")).json();
+    const payload = await (await fetch("/api/v1/townlight_access/integration-contracts")).json();
     const names = (payload.provides || []).map((item) => item.contract).join(", ");
     replaceWithText(contracts, "Contracts published", names || "No contracts published.", false);
   }
 
   async function loadReviews() {
-    const payload = await (await fetch("/api/v1/civicaccess/reviews")).json();
+    const payload = await (await fetch("/api/v1/townlight_access/reviews")).json();
     reviews.replaceChildren();
     if (!payload.reviews || payload.reviews.length === 0) {
       const empty = document.createElement("p");
@@ -333,9 +333,9 @@ def render_staff_page() -> str:
   }
 
   async function exportReview(reviewId) {
-    const response = await fetch(`/api/v1/civicaccess/reviews/${reviewId}/records-export`, {
+    const response = await fetch(`/api/v1/townlight_access/reviews/${reviewId}/records-export`, {
       method: "POST",
-      headers: { "X-CivicAccess-Write-Token": currentToken() },
+      headers: { "X-Townlight-Access-Write-Token": currentToken() },
     });
     const payload = await response.json();
     if (!response.ok) {
@@ -343,16 +343,24 @@ def render_staff_page() -> str:
       return;
     }
     replaceWithText(exportResult, "Records export ready", `${payload.target_module}: ${payload.export.status}. ${payload.export.retention_note}`);
+    const file = new Blob([payload.artifact.content], { type: "text/markdown;charset=utf-8" });
+    const url = URL.createObjectURL(file);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = payload.artifact.file_name;
+    link.textContent = "Download complete review record";
+    exportResult.appendChild(link);
+    link.addEventListener("click", () => setTimeout(() => URL.revokeObjectURL(url), 1000), {once: true});
   }
 
   createReview.addEventListener("click", async () => {
     createReview.disabled = true;
     try {
-      const response = await fetch("/api/v1/civicaccess/review", {
+      const response = await fetch("/api/v1/townlight_access/review", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CivicAccess-Write-Token": currentToken(),
+          "X-Townlight-Access-Write-Token": currentToken(),
         },
         body: JSON.stringify({ title: title.value, body: body.value, has_alt_text: altText.checked, language: "en" }),
       });
@@ -368,7 +376,7 @@ def render_staff_page() -> str:
   });
 
   Promise.all([loadReadiness(), loadContracts(), loadReviews()]).catch((error) => {
-    replaceWithText(readiness, "Workspace could not load", error.message || "Check CivicAccess service health.", true);
+    replaceWithText(readiness, "Workspace could not load", error.message || "Check Townlight Access service health.", true);
   });
 </script>
 </body>

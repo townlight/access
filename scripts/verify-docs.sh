@@ -26,15 +26,15 @@ required=(
   "MILESTONE_0_7_DONE.md"
   "docs/index.html"
   "pyproject.toml"
-  "civicaccess/__init__.py"
-  "civicaccess/main.py"
-  "civicaccess/access_review.py"
-  "civicaccess/db_admin.py"
-  "civicaccess/plain_language.py"
-  "civicaccess/multilingual.py"
-  "civicaccess/exports.py"
-  "civicaccess/workflows.py"
-  "civicaccess/public_ui.py"
+  "townlight_access/__init__.py"
+  "townlight_access/main.py"
+  "townlight_access/access_review.py"
+  "townlight_access/db_admin.py"
+  "townlight_access/plain_language.py"
+  "townlight_access/multilingual.py"
+  "townlight_access/exports.py"
+  "townlight_access/workflows.py"
+  "townlight_access/public_ui.py"
 )
 
 echo "==> Required-artifact check"
@@ -48,7 +48,7 @@ done
 echo "==> Current-facing shipped/planned truth check"
 current_files=("README.md" "README.txt" "USER-MANUAL.md" "docs/index.html")
 bad_markers=(
-  "civicaccess is shipping"
+  "townlight_access is shipping"
   "Shipping v0.1.0"
   "certified ADA compliance is available"
   "legal advice is available"

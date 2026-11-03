@@ -1,27 +1,29 @@
-"""FastAPI runtime foundation for CivicAccess."""
+"""FastAPI runtime foundation for Townlight Access."""
 
 import hmac
 import os
 from pathlib import Path
 
-from civiccore import __version__ as CIVICCORE_VERSION
+from townlight_core import __version__ as TOWNLIGHT_CORE_VERSION
 from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
 from sqlalchemy.engine import make_url
 
-from civicaccess import __version__
-from civicaccess.access_review import (
+from townlight_access import __version__
+from townlight_access.access_review import (
     AccessibilityReviewRepository,
     StoredAccessibilityReview,
     review_accessibility,
 )
-from civicaccess.exports import build_accessible_export
-from civicaccess.multilingual import create_language_variant
-from civicaccess.plain_language import rewrite_plain_language
-from civicaccess.public_ui import render_public_lookup_page, render_staff_page
-from civicaccess.workflows import (
+from townlight_access.exports import build_accessible_export
+from townlight_access.record_artifact import build_record_artifact
+from dataclasses import asdict
+from townlight_access.multilingual import create_language_variant
+from townlight_access.plain_language import rewrite_plain_language
+from townlight_access.public_ui import render_public_lookup_page, render_staff_page
+from townlight_access.workflows import (
     build_accessible_form_plan,
     build_ada_title_ii_review_plan,
     build_publishing_workflow_plan,
@@ -30,9 +32,9 @@ from civicaccess.workflows import (
 
 
 app = FastAPI(
-    title="CivicAccess",
+    title="Townlight Access",
     version=__version__,
-    description="Accessibility, plain-language, multilingual, and ADA review support for CivicSuite.",
+    description="Accessibility, plain-language, multilingual, and ADA review support for Townlight.",
 )
 
 _review_repository: AccessibilityReviewRepository | None = None
@@ -86,14 +88,14 @@ def root() -> dict[str, str]:
     """Return current product state without overstating unshipped behavior."""
 
     return {
-        "name": "CivicAccess",
+        "name": "Townlight Access",
         "version": __version__,
         "status": "standalone readiness candidate",
         "message": (
-            "CivicAccess provides local accessibility review support with accessible-form planning, publishing workflow checks, WCAG-aligned review records, plain-language rewrites, multilingual sample variants, ADA Title II review-support packages, tagged-PDF expectations, records-ready export checklists, and API-backed public and staff interfaces. "
+            "Townlight Access provides local accessibility review support with accessible-form planning, publishing workflow checks, WCAG-aligned review records, plain-language rewrites, multilingual sample variants, ADA Title II review-support packages, tagged-PDF expectations, records-ready export checklists, and API-backed public and staff interfaces. "
             "It does not provide legal advice, certified ADA compliance, official translation certification, live LLM calls, or final publication approval."
         ),
-        "next_step": "Open /civicaccess/staff to review saved publication work and export records-ready packages.",
+        "next_step": "Open /townlight_access/staff to review saved publication work and export records-ready packages.",
     }
 
 
@@ -103,9 +105,9 @@ def health() -> dict[str, str]:
 
     return {
         "status": "ok",
-        "service": "civicaccess",
+        "service": "townlight_access",
         "version": __version__,
-        "civiccore_version": CIVICCORE_VERSION,
+        "townlight_core_version": TOWNLIGHT_CORE_VERSION,
     }
 
 
@@ -125,7 +127,7 @@ async def validation_exception_handler(
         status_code=422,
         content={
             "detail": {
-                "message": f"CivicAccess could not validate: {field_list}.",
+                "message": f"Townlight Access could not validate: {field_list}.",
                 "fix": (
                     "Send a JSON body that includes the required field names listed in "
                     "the fields array, using strings for text inputs and booleans for yes/no inputs."
@@ -143,22 +145,22 @@ def ready() -> dict[str, object]:
     return _readiness_payload()
 
 
-@app.get("/api/v1/civicaccess/readiness")
+@app.get("/api/v1/townlight_access/readiness")
 def readiness() -> dict[str, object]:
-    """Return detailed CivicAccess local persistence readiness for operators."""
+    """Return detailed Townlight Access local persistence readiness for operators."""
 
     return _readiness_payload()
 
 
-@app.get("/civicaccess", response_class=HTMLResponse)
-def public_civicaccess_page() -> str:
+@app.get("/townlight_access", response_class=HTMLResponse)
+def public_townlight_access_page() -> str:
     """Return the accessible public sample UI."""
 
     return render_public_lookup_page()
 
 
-@app.get("/civicaccess/staff", response_class=HTMLResponse)
-def staff_civicaccess_page() -> str:
+@app.get("/townlight_access/staff", response_class=HTMLResponse)
+def staff_townlight_access_page() -> str:
     """Return the staff publication review workspace.
 
     The page never embeds the server write token; the operator supplies it in the UI.
@@ -167,7 +169,7 @@ def staff_civicaccess_page() -> str:
     return render_staff_page()
 
 
-@app.post("/api/v1/civicaccess/analyze")
+@app.post("/api/v1/townlight_access/analyze")
 def analyze_accessibility(request: AccessibilityReviewRequest) -> dict[str, object]:
     """Stateless public accessibility analysis. No persistence, no token required."""
 
@@ -186,12 +188,12 @@ def analyze_accessibility(request: AccessibilityReviewRequest) -> dict[str, obje
     }
 
 
-@app.post("/api/v1/civicaccess/review")
+@app.post("/api/v1/townlight_access/review")
 def accessibility_review(
     request: AccessibilityReviewRequest,
-    x_civicaccess_write_token: str | None = Header(default=None),
+    x_townlight_access_write_token: str | None = Header(default=None),
 ) -> dict[str, object]:
-    _authorize_persistent_write(x_civicaccess_write_token)
+    _authorize_persistent_write(x_townlight_access_write_token)
     stored = _get_review_repository().create_review(
         title=request.title,
         body=request.body,
@@ -201,7 +203,7 @@ def accessibility_review(
     return _stored_review_response(stored)
 
 
-@app.get("/api/v1/civicaccess/reviews")
+@app.get("/api/v1/townlight_access/reviews")
 def list_accessibility_reviews(limit: int = 25) -> dict[str, object]:
     reviews = _get_review_repository().list_reviews(limit=limit)
     return {
@@ -211,7 +213,7 @@ def list_accessibility_reviews(limit: int = 25) -> dict[str, object]:
     }
 
 
-@app.get("/api/v1/civicaccess/reviews/{review_id}")
+@app.get("/api/v1/townlight_access/reviews/{review_id}")
 def get_accessibility_review(review_id: str) -> dict[str, object]:
     stored = _get_review_repository().get_review(review_id)
     if stored is None:
@@ -219,18 +221,18 @@ def get_accessibility_review(review_id: str) -> dict[str, object]:
             status_code=404,
             detail={
                 "message": "Accessibility review record not found.",
-                "fix": "Use a review_id returned by POST /api/v1/civicaccess/review.",
+                "fix": "Use a review_id returned by POST /api/v1/townlight_access/review.",
             },
         )
     return _stored_review_response(stored)
 
 
-@app.post("/api/v1/civicaccess/reviews/{review_id}/records-export")
+@app.post("/api/v1/townlight_access/reviews/{review_id}/records-export")
 def export_accessibility_review_record(
     review_id: str,
-    x_civicaccess_write_token: str | None = Header(default=None),
+    x_townlight_access_write_token: str | None = Header(default=None),
 ) -> dict[str, object]:
-    _authorize_persistent_write(x_civicaccess_write_token)
+    _authorize_persistent_write(x_townlight_access_write_token)
     repository = _get_review_repository()
     stored = repository.get_review(review_id)
     if stored is None:
@@ -238,15 +240,22 @@ def export_accessibility_review_record(
             status_code=404,
             detail={
                 "message": "Accessibility review record not found.",
-                "fix": "Use a review_id returned by POST /api/v1/civicaccess/review.",
+                "fix": "Use a review_id returned by POST /api/v1/townlight_access/review.",
             },
         )
     export = build_accessible_export(title=stored.title or "Untitled accessible publication")
     repository.record_audit_event(action="review.records_export", subject_id=review_id)
+    artifact = build_record_artifact({
+        "schema_version": 1, "kind": "accessibility-review",
+        "review": asdict(stored),
+        "audit_events": list(repository.review_audit_events(review_id)),
+        "identity_scope": "shared token; individual identity not established",
+    })
     return {
         "status": "records-export-ready",
-        "module": "civicaccess",
-        "target_module": "civicrecords-ai",
+        "artifact": {**artifact, "file_name": f"access-{review_id}.md"},
+        "module": "townlight_access",
+        "target_module": "townlight_records",
         "review": _stored_review_summary(stored),
         "export": {
             "title": export.title,
@@ -265,48 +274,48 @@ def export_accessibility_review_record(
     }
 
 
-@app.get("/api/v1/civicaccess/integration-contracts")
+@app.get("/api/v1/townlight_access/integration-contracts")
 def integration_contracts() -> dict[str, object]:
     return {
         "status": "ok",
-        "module": "civicaccess",
+        "module": "townlight_access",
         "provides": [
             {
-                "contract": "civicaccess.publication_accessibility_review.v1",
-                "endpoint": "/api/v1/civicaccess/review",
+                "contract": "townlight_access.publication_accessibility_review.v1",
+                "endpoint": "/api/v1/townlight_access/review",
                 "purpose": "Create a persisted accessibility review before publication.",
             },
             {
-                "contract": "civicaccess.records_export.v1",
-                "endpoint": "/api/v1/civicaccess/reviews/{review_id}/records-export",
-                "target_module": "civicrecords-ai",
+                "contract": "townlight_access.records_export.v1",
+                "endpoint": "/api/v1/townlight_access/reviews/{review_id}/records-export",
+                "target_module": "townlight_records",
                 "purpose": "Export review provenance and checklist data for records retention.",
             },
         ],
         "downstream_ready_for": [
-            "civiczone public notice text",
-            "civicplan policy summaries",
-            "civicpermit applicant forms",
-            "civicinspect notices",
+            "townlight_zoning public notice text",
+            "townlight_planning policy summaries",
+            "townlight_permitting applicant forms",
+            "townlight_inspections notices",
             "civicgrants public opportunity notices",
             "civicprocure RFP and award packets",
         ],
     }
 
 
-@app.post("/api/v1/civicaccess/plain-language")
+@app.post("/api/v1/townlight_access/plain-language")
 def plain_language_rewrite(request: PlainLanguageRequest) -> dict[str, object]:
     result = rewrite_plain_language(request.text)
     return result.__dict__
 
 
-@app.post("/api/v1/civicaccess/language-variant")
+@app.post("/api/v1/townlight_access/language-variant")
 def language_variant(request: LanguageVariantRequest) -> dict[str, object]:
     result = create_language_variant(text=request.text, language=request.language)
     return result.__dict__
 
 
-@app.post("/api/v1/civicaccess/forms")
+@app.post("/api/v1/townlight_access/forms")
 def accessible_form(request: AccessibleFormRequest) -> dict[str, object]:
     result = build_accessible_form_plan(form_name=request.form_name, fields=tuple(request.fields))
     return {
@@ -318,7 +327,7 @@ def accessible_form(request: AccessibleFormRequest) -> dict[str, object]:
     }
 
 
-@app.post("/api/v1/civicaccess/publishing-workflow")
+@app.post("/api/v1/townlight_access/publishing-workflow")
 def publishing_workflow(request: PublishingWorkflowRequest) -> dict[str, object]:
     result = build_publishing_workflow_plan(
         title=request.title,
@@ -335,7 +344,7 @@ def publishing_workflow(request: PublishingWorkflowRequest) -> dict[str, object]
     }
 
 
-@app.post("/api/v1/civicaccess/ada-title-ii")
+@app.post("/api/v1/townlight_access/ada-title-ii")
 def ada_title_ii_review(request: AdaTitleIiReviewRequest) -> dict[str, object]:
     result = build_ada_title_ii_review_plan(
         service_area=request.service_area,
@@ -350,7 +359,7 @@ def ada_title_ii_review(request: AdaTitleIiReviewRequest) -> dict[str, object]:
     }
 
 
-@app.post("/api/v1/civicaccess/tagged-pdf")
+@app.post("/api/v1/townlight_access/tagged-pdf")
 def tagged_pdf_expectations(request: TaggedPdfExpectationRequest) -> dict[str, object]:
     result = build_tagged_pdf_expectations(heading_levels=tuple(request.heading_levels))
     return {
@@ -361,7 +370,7 @@ def tagged_pdf_expectations(request: TaggedPdfExpectationRequest) -> dict[str, o
     }
 
 
-@app.post("/api/v1/civicaccess/export")
+@app.post("/api/v1/townlight_access/export")
 def accessible_export(request: AccessibleExportRequest) -> dict[str, object]:
     result = build_accessible_export(title=request.title, format=request.format)
     return {
@@ -375,7 +384,7 @@ def accessible_export(request: AccessibleExportRequest) -> dict[str, object]:
 
 
 def _trusted_write_token() -> str | None:
-    return os.environ.get("CIVICACCESS_TRUSTED_WRITE_TOKEN")
+    return os.environ.get("TOWNLIGHT_ACCESS_TRUSTED_WRITE_TOKEN")
 
 
 def _authorize_persistent_write(provided_token: str | None) -> None:
@@ -384,16 +393,16 @@ def _authorize_persistent_write(provided_token: str | None) -> None:
         raise HTTPException(
             status_code=503,
             detail={
-                "message": "CivicAccess durable write guard is not configured.",
-                "fix": "Set CIVICACCESS_TRUSTED_WRITE_TOKEN before enabling persistence-backed writes.",
+                "message": "Townlight Access durable write guard is not configured.",
+                "fix": "Set TOWNLIGHT_ACCESS_TRUSTED_WRITE_TOKEN before enabling persistence-backed writes.",
             },
         )
     if not hmac.compare_digest(provided_token or "", expected_token):
         raise HTTPException(
             status_code=403,
             detail={
-                "message": "CivicAccess durable write token is missing or invalid.",
-                "fix": "Send the configured X-CivicAccess-Write-Token header for persistence-backed writes.",
+                "message": "Townlight Access durable write token is missing or invalid.",
+                "fix": "Send the configured X-Townlight-Access-Write-Token header for persistence-backed writes.",
             },
         )
 
@@ -415,17 +424,17 @@ def _sync_database_url(url: str) -> str:
 
 def _review_database_url() -> str | None:
     # Explicit per-module override wins (dev SQLite or a pre-built Postgres URL).
-    configured = os.environ.get("CIVICACCESS_REVIEW_DB_URL")
+    configured = os.environ.get("TOWNLIGHT_ACCESS_REVIEW_DB_URL")
     if configured:
         return _sync_database_url(configured)
-    # Default to the shared CivicCore Postgres the desktop supervisor injects.
+    # Default to the shared TownlightCore Postgres the desktop supervisor injects.
     supervisor_url = os.environ.get("DATABASE_URL")
     if supervisor_url:
         return _sync_database_url(supervisor_url)
     # ponytail: SQLite is the explicit dev fallback only when no shared Postgres is configured.
-    data_dir = Path(os.environ.get("CIVICACCESS_DATA_DIR", Path.cwd() / "data")).resolve()
+    data_dir = Path(os.environ.get("TOWNLIGHT_ACCESS_DATA_DIR", Path.cwd() / "data")).resolve()
     data_dir.mkdir(parents=True, exist_ok=True)
-    return f"sqlite:///{data_dir / 'civicaccess-reviews.db'}"
+    return f"sqlite:///{data_dir / 'townlight_access-reviews.db'}"
 
 
 def _get_review_repository() -> AccessibilityReviewRepository:
@@ -439,18 +448,16 @@ def _get_review_repository() -> AccessibilityReviewRepository:
 
 
 def _readiness_payload() -> dict[str, object]:
-    db_url = _review_database_url()
     repository = _get_review_repository()
     schema_status = repository.schema_status()
     blockers: list[str] = []
     if not schema_status.ready:
-        blockers.append("Run the local CivicAccess schema status/migration check.")
+        blockers.append("Run the local Townlight Access schema status/migration check.")
     ready_for_public_use = not blockers
     return {
         "status": "ready" if ready_for_public_use else "not-ready",
         "ready": ready_for_public_use,
         "review_database_configured": True,
-        "review_database_url": db_url,
         "schema_ready": schema_status.ready,
         "schema_version": schema_status.schema_version,
         "expected_schema_version": schema_status.expected_schema_version,

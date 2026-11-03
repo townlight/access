@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for helping civicaccess become useful municipal software.
+Thank you for helping townlight_access become useful municipal software.
 
 ## Development Loop
 
@@ -11,7 +11,7 @@ Thank you for helping civicaccess become useful municipal software.
 
 ## Boundaries
 
-- civicaccess gives accessibility support, not certified ADA compliance.
+- townlight_access gives accessibility support, not certified ADA compliance.
 - Do not present multilingual variants as publication-ready without human review.
 - Do not import Townlight Core placeholder packages.
 - Do not claim planned behavior is shipped.

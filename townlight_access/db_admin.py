@@ -2,17 +2,17 @@ from __future__ import annotations
 
 import argparse
 
-from civicaccess.access_review import AccessibilityReviewRepository
+from townlight_access.access_review import AccessibilityReviewRepository
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Check and initialize the local CivicAccess review database schema."
+        description="Check and initialize the local Townlight Access review database schema."
     )
     parser.add_argument(
         "--db-url",
         required=True,
-        help="SQLAlchemy database URL used by CIVICACCESS_REVIEW_DB_URL.",
+        help="SQLAlchemy database URL used by TOWNLIGHT_ACCESS_REVIEW_DB_URL.",
     )
     args = parser.parse_args()
 
@@ -26,7 +26,7 @@ def main() -> None:
     missing = ", ".join(status.missing_tables) if status.missing_tables else "none"
     version = status.schema_version or "none"
     print(
-        "CivicAccess schema "
+        "Townlight Access schema "
         f"{ready}: version={version}; expected={status.expected_schema_version}; "
         f"dialect={status.dialect}; missing_tables={missing}."
     )

@@ -1,4 +1,4 @@
-"""Deterministic accessibility review helpers for CivicAccess."""
+"""Deterministic accessibility review helpers for Townlight Access."""
 
 from __future__ import annotations
 
@@ -49,7 +49,7 @@ DISCLAIMER = (
 
 metadata = sa.MetaData()
 
-SCHEMA_VERSION = "civicaccess-windows-local-state-v1"
+SCHEMA_VERSION = "townlight_access-windows-local-state-v1"
 
 accessibility_review_records = sa.Table(
     "accessibility_review_records",
@@ -63,7 +63,7 @@ accessibility_review_records = sa.Table(
     sa.Column("findings", sa.JSON(), nullable=False),
     sa.Column("disclaimer", sa.Text(), nullable=False),
     sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
-    schema="civicaccess",
+    schema="townlight_access",
 )
 
 audit_events = sa.Table(
@@ -74,7 +74,7 @@ audit_events = sa.Table(
     sa.Column("subject_id", sa.String(80), nullable=True),
     sa.Column("actor", sa.String(120), nullable=False),
     sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
-    schema="civicaccess",
+    schema="townlight_access",
 )
 
 schema_migrations = sa.Table(
@@ -82,7 +82,7 @@ schema_migrations = sa.Table(
     metadata,
     sa.Column("schema_version", sa.String(40), primary_key=True),
     sa.Column("applied_at", sa.DateTime(timezone=True), nullable=False),
-    schema="civicaccess",
+    schema="townlight_access",
 )
 
 
@@ -101,11 +101,11 @@ class AccessibilityReviewRepository:
     def __init__(self, *, db_url: str | None = None, engine: Engine | None = None) -> None:
         base_engine = engine or create_engine(db_url or "sqlite+pysqlite:///:memory:", future=True)
         if base_engine.dialect.name == "sqlite":
-            self.engine = base_engine.execution_options(schema_translate_map={"civicaccess": None})
+            self.engine = base_engine.execution_options(schema_translate_map={"townlight_access": None})
         else:
             self.engine = base_engine
             with self.engine.begin() as connection:
-                connection.execute(sa.text("CREATE SCHEMA IF NOT EXISTS civicaccess"))
+                connection.execute(sa.text("CREATE SCHEMA IF NOT EXISTS townlight_access"))
         self.migrate()
 
     def migrate(self) -> SchemaStatus:
@@ -129,7 +129,7 @@ class AccessibilityReviewRepository:
 
     def schema_status(self) -> SchemaStatus:
         inspector = sa.inspect(self.engine)
-        translated_schema = None if self.engine.dialect.name == "sqlite" else "civicaccess"
+        translated_schema = None if self.engine.dialect.name == "sqlite" else "townlight_access"
         available_tables = set(inspector.get_table_names(schema=translated_schema))
         expected_tables = {"accessibility_review_records", "audit_events", "schema_migrations"}
         missing_tables = tuple(sorted(expected_tables - available_tables))
@@ -154,7 +154,7 @@ class AccessibilityReviewRepository:
             return connection.execute(sa.select(sa.func.count()).select_from(accessibility_review_records)).scalar_one()
 
     def create_review(
-        self, *, title: str, body: str, has_alt_text: bool, language: str, actor: str = "staff"
+        self, *, title: str, body: str, has_alt_text: bool, language: str, actor: str = "shared-token-staff"
     ) -> StoredAccessibilityReview:
         review = review_accessibility(
             title=title,
@@ -201,7 +201,7 @@ class AccessibilityReviewRepository:
         *,
         action: str,
         subject_id: str | None = None,
-        actor: str = "staff",
+        actor: str = "shared-token-staff",
         connection: object | None = None,
     ) -> str:
         """Persist a who/what/when audit row for a write or export action."""
@@ -220,6 +220,15 @@ class AccessibilityReviewRepository:
             with self.engine.begin() as own_connection:
                 own_connection.execute(statement)
         return event_id
+
+    def review_audit_events(self, review_id: str) -> tuple[dict[str, object], ...]:
+        """Return the complete subject history; export must not truncate provenance."""
+        with self.engine.begin() as connection:
+            rows = connection.execute(
+                sa.select(audit_events).where(audit_events.c.subject_id == review_id)
+                .order_by(audit_events.c.created_at, audit_events.c.event_id)
+            ).mappings().all()
+        return tuple(dict(row) for row in rows)
 
     def list_audit_events(self, *, limit: int = 50) -> tuple[dict[str, object], ...]:
         bounded_limit = max(1, min(limit, 200))
