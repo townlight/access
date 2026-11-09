@@ -1,6 +1,6 @@
-Windows x64 Beta 1 · MSI 1.7.2.1
+Windows x64 Beta 1 · MSI 1.8.0.1
 
-The signed Windows x64 beta 1.7.2.1 updates installer metadata while
+The signed Windows x64 beta 1.8.0.1 updates installer metadata while
 preserving the accepted signed application/runtime cabinet.
 
 - Townlight Access User Manual
@@ -72,7 +72,7 @@ tagged-PDF, ADA and publishing helpers remain checklists. The standalone
 service does not acquire Windows draft persistence or native
 individual-account identity merely because it shares this package.
 
-Version 0.5.0 · included in Windows MSI 1.7.2.1 Townlight Access is the
+Version 0.5.0 · included in Windows MSI 1.8.0.1 Townlight Access is the
 accessibility, plain-language, multilingual, and ADA Title II
 review-support module for Townlight.
 
@@ -347,6 +347,6 @@ Release status
 v0.5.0 is an early release. Probe gaps #1–#4 (clean install,
 staff/public authz, audit logging, backup/restore durability) are closed
 with evidence (see PROBE-PROGRESS.md). Access 0.5.0 is included in
-Windows MSI 1.7.2.1. See the exact installed acceptance and its limits.
+Windows MSI 1.8.0.1. See the exact installed acceptance and its limits.
 The earlier v1.0.0 tag was published in error and is retained only as
 historical evidence.
