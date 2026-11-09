@@ -1,6 +1,6 @@
-Windows x64 Beta 1 · MSI 1.7.2.1
+Windows x64 Beta 1 · MSI 1.8.0.1
 
-The signed [Windows x64 beta 1.7.2.1](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.7.2.1) updates installer metadata while preserving the accepted signed application/runtime cabinet.
+The signed [Windows x64 beta 1.8.0.1](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.8.0.1) adds the three staff workspaces and automatically refreshes the bundled runtime when upgrading from 1.7.2.1.
 
 - <a href="https://townlight.github.io/manuals/access.html#townlight-access-user-manual" id="toc-townlight-access-user-manual">Townlight Access User Manual</a>
   - <a href="https://townlight.github.io/manuals/access.html#windows-staff-workflow-0.5.0-candidate" id="toc-windows-staff-workflow-0.5.0-candidate">Windows staff workflow — 0.5.0</a>
@@ -22,7 +22,7 @@ Use a fresh Windows profile. The approved profile path is `%LOCALAPPDATA%\CivicS
 4.  Reopen saved drafts from Access, including after restarting the app. Select Export record on the desired review or draft. The desktop writes a Markdown record and verifies its content hash and companion manifest before reporting completion. The fenced JSON is the complete record, including source, output/advice and relevant provenance; ordinary HTML rendering is unnecessary to read it.
 5.  To hand the record to Records, open the intended Records request, attach the actual exported Markdown file using Records’ native file picker, and read it back from that request. A successful Access export alone does not attach evidence to a request or authorize disclosure. Records permissions and review/release rules still apply.
 
-The complete review export includes reviewed source, findings, saved advice/model/outcome where available, actor/time, relevant audit history and advisory limits. Draft exports include the retained source/output pair and review status. Back up the complete profile using System Health and restore only a matching new-format backup. The [Windows acceptance summary](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.7.2.1/ACCEPTANCE-Windows-1.7.2.1.md) records installed export, restart and recovery results. Real-model rewrite and Spanish drafts passed in a 16 GiB Sandbox; the 8 GiB attempts timed out and saved no draft.
+The complete review export includes reviewed source, findings, saved advice/model/outcome where available, actor/time, relevant audit history and advisory limits. Draft exports include the retained source/output pair and review status. Back up the complete profile using System Health and restore only a matching new-format backup. The [Windows acceptance summary](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.0.1/ACCEPTANCE-Windows-1.8.0.1.md) records installed export, restart and recovery results. Real-model rewrite and Spanish drafts passed in a 16 GiB Sandbox; the 8 GiB attempts timed out and saved no draft.
 
 No automated result certifies ADA compliance, creates an accessible/tagged PDF, approves publication or replaces a qualified translator or ADA coordinator.
 
@@ -32,7 +32,7 @@ The separately run FastAPI service provides deterministic checks and planning he
 
 Standalone saved-review exports now return a complete Markdown artifact with source, findings and relevant audit provenance, plus its SHA-256. The staff page offers that actual artifact for download. Other form, tagged-PDF, ADA and publishing helpers remain checklists. The standalone service does not acquire Windows draft persistence or native individual-account identity merely because it shares this package.
 
-**Version 0.5.0 · included in Windows MSI 1.7.2.1** Townlight Access is the accessibility, plain-language, multilingual, and ADA Title II review-support module for Townlight.
+**Version 0.5.0 · included in Windows MSI 1.8.0.1** Townlight Access is the accessibility, plain-language, multilingual, and ADA Title II review-support module for Townlight.
 
 This manual has two parts. Read the one that fits your role:
 
@@ -245,4 +245,4 @@ Townlight Access **depends on Townlight Core**; Townlight Core does not depend o
 
 ### Release status
 
-`v0.5.0` is an early release. Probe gaps \#1–#4 (clean install, staff/public authz, audit logging, backup/restore durability) are closed with evidence (see `PROBE-PROGRESS.md`). Access 0.5.0 is included in Windows MSI 1.7.2.1. See the [exact installed acceptance and its limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.7.2.1/ACCEPTANCE-Windows-1.7.2.1.md). The earlier `v1.0.0` tag was published in error and is retained only as historical evidence.
+`v0.5.0` is an early release. Probe gaps \#1–#4 (clean install, staff/public authz, audit logging, backup/restore durability) are closed with evidence (see `PROBE-PROGRESS.md`). Access 0.5.0 is included in Windows MSI 1.8.0.1. See the [exact installed acceptance and its limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.0.1/ACCEPTANCE-Windows-1.8.0.1.md). The earlier `v1.0.0` tag was published in error and is retained only as historical evidence.
