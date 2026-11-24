@@ -1,12 +1,16 @@
-## Windows 1.9.1.1 Station recorder release
+## Windows 1.9.3.2 current release
+
+Townlight for Windows 1.9.3.2 is the current signed public beta. See the [release notes](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.9.3.2) and [acceptance record](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.3.2/ACCEPTANCE-Windows-1.9.3.2.md).
+
+For an existing city, make and verify a backup, close Townlight, run the signed Windows 1.9.3.2 MSI, then reopen Townlight under the same Windows account and existing profile. Direct upgrade is tested from 1.9.3.1; earlier paths have separate prior evidence.
+
+## Windows 1.9.1.1 historical Station recorder release
 
 Windows 1.9.1.1 improves the clerk workflows for Records, Meetings, and Code, adds Open Hall icons, and fixes the ten-second Station preview.
 
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading.
-
 [Release and downloads](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.9.1.1) · [Acceptance and limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.1.1/ACCEPTANCE-Windows-1.9.1.1.md).
 
-Windows x64 Beta 1 · MSI 1.9.1.1
+Windows x64 Beta 1 · MSI 1.9.3.2
 
 Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supported source/format pairs. Installed Windows Sandbox checks exercised preview, save and durable readback using public captures and fixtures, plus the documented Townlight handoffs. These checks do not establish automatic discovery on every live portal or a complete retest of every module.
 
@@ -25,8 +29,6 @@ Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supp
 Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supported source/format pairs. Installed Windows Sandbox checks exercised preview, save and durable readback using public captures and fixtures, plus the documented Townlight handoffs. These checks do not establish automatic discovery on every live portal or a complete retest of every module.
 
 [All 31 sources, formats and handoffs](https://townlight.github.io/manuals/meeting-imports.html) · [Installed acceptance](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md).
-
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading.
 
 Windows 1.9.1.1 contains Station 0.4.4, Records 1.8.0.dev4, Townlight Runtime 0.3.3 and Meetings 1.0.6. The release acceptance summary identifies the verified workflows and the builds that produced the evidence.
 
