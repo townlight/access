@@ -15,7 +15,7 @@ Windows x64 Beta 1 · MSI 1.9.3.2
 Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supported source/format pairs. Installed Windows Sandbox checks exercised preview, save and durable readback using public captures and fixtures, plus the documented Townlight handoffs. These checks do not establish automatic discovery on every live portal or a complete retest of every module.
 
 - <a href="https://townlight.github.io/manuals/access.html#townlight-access-user-manual" id="toc-townlight-access-user-manual">Townlight Access User Manual</a>
-  - <a href="https://townlight.github.io/manuals/access.html#windows-staff-workflow-0.5.0-candidate" id="toc-windows-staff-workflow-0.5.0-candidate">Windows staff workflow — 0.5.0</a>
+  - <a href="https://townlight.github.io/manuals/access.html#windows-staff-workflow-0.5.0" id="toc-windows-staff-workflow-0.5.0">Windows staff workflow — 0.5.0</a>
   - <a href="https://townlight.github.io/manuals/access.html#standalone-support-service" id="toc-standalone-support-service">Standalone support service</a>
   - <a href="https://townlight.github.io/manuals/access.html#part-1-for-civic-staff" id="toc-part-1-for-civic-staff">Part 1 — For Civic Staff</a>
   - <a href="https://townlight.github.io/manuals/access.html#part-2-for-it-technical-staff" id="toc-part-2-for-it-technical-staff">Part 2 — For IT &amp; Technical Staff</a>
@@ -266,7 +266,7 @@ Townlight Access **depends on Townlight Core**; Townlight Core does not depend o
 
 ### Release status
 
-`v0.5.0` is an early release. Probe gaps \#1–#4 (clean install, staff/public authz, audit logging, backup/restore durability) are closed with evidence (see `PROBE-PROGRESS.md`). Access 0.5.0 is included in Windows MSI 1.9.3.2. See the [exact installed acceptance and its limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md). The earlier `v1.0.0` tag was published in error and is retained only as historical evidence.
+`v0.5.0` is an early release. Probe gaps \#1–#4 (clean install, staff/public authz, audit logging, backup/restore durability) are closed with evidence (see `PROBE-PROGRESS.md`). Access 0.5.0 is included in Windows MSI 1.9.3.2. See the [Historical 1.8.1.1 Access acceptance](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md). The earlier `v1.0.0` tag was published in error and is retained only as historical evidence.
 
 
 ## Source package installation

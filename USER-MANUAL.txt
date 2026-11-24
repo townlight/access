@@ -284,4 +284,4 @@ Townlight Access depends on Townlight Core; Townlight Core does not depend on To
 
 Release status
 
-v0.5.0 is an early release. Probe gaps #1–#4 (clean install, staff/public authz, audit logging, backup/restore durability) are closed with evidence (see PROBE-PROGRESS.md). Access 0.5.0 is included in Windows MSI 1.9.3.2. See the exact installed acceptance and its limits. The earlier v1.0.0 tag was published in error and is retained only as historical evidence.
+v0.5.0 is an early release. Probe gaps #1–#4 (clean install, staff/public authz, audit logging, backup/restore durability) are closed with evidence (see PROBE-PROGRESS.md). Access 0.5.0 is included in Windows MSI 1.9.3.2. See the Historical 1.8.1.1 Access acceptance. The earlier v1.0.0 tag was published in error and is retained only as historical evidence.
